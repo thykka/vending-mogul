@@ -27,7 +27,6 @@ Constructs:
   - `ActionIntent`: ActionIntentId
   - `Target`: entity
   - `Source`: entity
-  - `completed`: bool
 
 ## What happens when player presses a button
 
@@ -45,8 +44,8 @@ Constructs:
   - Iterate through ActionEvents:
     - Known ActionIntent is found:
       - Execute action with ActionEvent `Target` & `Source`
-    - Set ActionEvent `completed`
-  - Remove `completed` Actions
+    - If there's a problem, spawn an entity with ActionError
+  - Remove all Actions
 
 ## What kinds of actions do we actually need for each view?
 

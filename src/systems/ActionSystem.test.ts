@@ -3,7 +3,7 @@ import { Action } from '../components/Action';
 import { ActionSystem } from './ActionSystem';
 
 describe('Actions', () => {
-  it('should remove an action entity when action is completed', () => {
+  it('should remove all action entities', () => {
     const world = new World();
     const action = world.createEntity();
     world.addEntityComponents(action, new Action());
