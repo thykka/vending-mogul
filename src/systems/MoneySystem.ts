@@ -2,6 +2,9 @@ import { System, World } from '@jakeklassen/ecs';
 import { UnlockPrice } from '../components/UnlockPrice';
 import { Money } from '../components/Money';
 import { BuyAction } from '../components/BuyAction';
+import { spawnActionError } from '../factories/Action-factory';
+import type { ErrorId, ErrorMeta } from '../shared/errors';
+import { OrderPrice } from '../components/OrderPrice';
 
 export class MoneySystem extends System {
   constructor() {
@@ -12,13 +15,38 @@ export class MoneySystem extends System {
     for (const [entity, components] of world.view(BuyAction)) {
       const { buyer, buyable } = components.get(BuyAction);
       const buyerComponents = world.getEntityComponents(buyer);
-      const buyableComponents = world.getEntityComponents(buyable);
       const money = buyerComponents.get(Money);
-      if (!money) continue;
-      const unlockCost = buyableComponents.get(UnlockPrice);
-      if (!unlockCost) continue;
-      if (money.value - unlockCost.value < 0) continue;
-      money.value -= unlockCost.value;
+      if (!money) {
+        this.showError(world, 'buyNoMoney', {});
+        continue;
+      }
+      const cost = this.getCost(world, buyable);
+      if (cost === null) {
+        this.showError(world, 'buyNoCost', {});
+        continue;
+      }
+      if (money.value - cost < 0) {
+        this.showError(world, 'buyNotEnoughMoney', { amount: 100 });
+        continue;
+      }
+      money.value -= cost;
     }
+  }
+
+  getCost(world: World, buyableEntity: number): number | null {
+    const buyableComponents = world.getEntityComponents(buyableEntity);
+    const unlockPrice = buyableComponents.get(UnlockPrice);
+    if (unlockPrice) return unlockPrice.value;
+    const orderPrice = buyableComponents.get(OrderPrice);
+    if (orderPrice) return orderPrice.value;
+    return null;
+  }
+
+  showError<T extends ErrorId>(
+    world: World,
+    errorId: T,
+    errorMeta: ErrorMeta<T>
+  ) {
+    spawnActionError(world, errorId, errorMeta);
   }
 }
