@@ -5,6 +5,7 @@ import { BuyAction } from '@components/BuyAction';
 import { ActionError } from '@components/ActionError';
 import { Timer } from '@components/timer';
 import { InstallAction } from '@components/InstallAction';
+import { StockAction } from '@components/StockAction';
 import type { ErrorId, ErrorMeta } from '@shared/errors';
 
 /** How long (ms) an ActionError stays visible before it is removed. */
@@ -76,6 +77,20 @@ export function spawnInstallAction(
     action,
     new Action(),
     new InstallAction(machine, location)
+  );
+  return action;
+}
+
+export function spawnStockAction(
+  world: World,
+  product: number,
+  slot: number
+): number {
+  const action = world.createEntity();
+  world.addEntityComponents(
+    action,
+    new Action(),
+    new StockAction(product, slot)
   );
   return action;
 }

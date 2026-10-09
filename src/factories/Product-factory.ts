@@ -7,6 +7,7 @@ import { Position } from '@components/Position';
 import { Price } from '@components/Price';
 import { Sprite } from '@components/Sprite';
 import { Shape } from '@components/Shape';
+import { Size } from '@components/Size';
 
 export function spawnProductStack(
   world: World,
@@ -26,7 +27,8 @@ export function spawnProductStack(
     new Position(x, y),
     new Price(productData.salePrice),
     new Sprite(...spriteData.source),
-    new Shape(productData.shape)
+    new Shape(productData.shape),
+    new Size(productData.width, productData.height)
   );
   return entity;
 }

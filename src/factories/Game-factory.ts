@@ -6,6 +6,7 @@ import { UnlockSystem } from '@systems/UnlockSystem';
 import { ActionSystem } from '@systems/ActionSystem';
 import { OrderSystem } from '@systems/OrderSystem';
 import { InstallSystem } from '@systems/InstallSystem';
+import { StockSystem } from '@systems/StockSystem';
 import { TimerSystem } from '@systems/TimerSystem';
 import { ActionErrorSystem } from '@systems/ActionErrorSystem';
 import { DeliverySystem } from '@systems/DeliverySystem';
@@ -15,12 +16,20 @@ export function spawnGame(): World {
   globalThis.world = world;
   globalThis.player = spawnPlayer(world);
   spawnLocations(world);
-  // Order matters: pay, then unlock/order/install, then clean up action entities
+  // Systems run in this order on every update, reacting to each other's output:
+  // - MoneySystem marks affordable BuyActions as Paid, and Unlock/OrderSystem
+  //   only act on Paid actions, so it must run before them
+  // - ActionSystem deletes every action entity, so it must run after all
+  //   systems that handle actions, or those actions are lost unhandled
+  // - TimerSystem runs before the systems that react to completed Timers,
+  //   so they see completions in the same update instead of the next one
   world.addSystem(new MoneySystem());
   world.addSystem(new UnlockSystem());
   world.addSystem(new OrderSystem());
   world.addSystem(new InstallSystem());
+  world.addSystem(new StockSystem());
   world.addSystem(new ActionSystem());
+
   world.addSystem(new TimerSystem());
   world.addSystem(new ActionErrorSystem());
   world.addSystem(new DeliverySystem());

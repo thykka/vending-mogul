@@ -1,7 +1,7 @@
 {
   "bubblegumbox": {
     "price": 25,
-    "deliveryTime": 5,
+    "deliveryTime": 1,
     "products": [
       {
         "product": "bubblegum",
@@ -11,7 +11,7 @@
   },
   "bouncyballbox": {
     "price": 60,
-    "deliveryTime": 8,
+    "deliveryTime": 2,
     "products": [
       {
         "product": "bouncyball",

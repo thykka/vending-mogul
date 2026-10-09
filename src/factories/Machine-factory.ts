@@ -7,6 +7,7 @@ import { Parent } from '@components/Parent';
 import { Contents } from '@components/Contents';
 import { Money } from '@components/Money';
 import { Children } from '@components/Children';
+import { ProductCapacity } from '@components/ProductCapacity';
 
 export function spawnMachine(
   world: World,
@@ -34,7 +35,8 @@ export function spawnMachine(
         new Parent(machine),
         new Size(slotData.width, slotData.height),
         new Shape(slotData.shape),
-        new Contents(null)
+        new Contents(null),
+        new ProductCapacity(slotData.capacity)
       );
       children.entities.add(slot);
     });

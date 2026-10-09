@@ -11,6 +11,11 @@ export const Errors = {
   installNotStored: (_: NoMeta) => 'Cannot install: Machine is not in Storage',
   installLocationLocked: (_: NoMeta) => 'Cannot install: Location is locked',
   installLocationFull: (_: NoMeta) => 'Cannot install: Location is full',
+  stockNotStored: (_: NoMeta) => 'Cannot stock: Product is not in Storage',
+  stockNoFit: (_: NoMeta) => 'Cannot stock: Product does not fit the slot',
+  stockSlotOccupied: (_: NoMeta) =>
+    'Cannot stock: Slot holds a different product',
+  stockSlotFull: (_: NoMeta) => 'Cannot stock: Slot is full',
 } as const;
 
 export type ErrorId = keyof typeof Errors;
