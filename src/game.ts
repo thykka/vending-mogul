@@ -14,7 +14,7 @@ export function notifyListeners() {
   listeners.forEach((listener) => listener());
 }
 
-let lastTick = performance.now();
+let lastTick: number;
 let rafId: number | null = null;
 
 function tick() {
@@ -31,6 +31,7 @@ export function startLoop() {
   lastTick = performance.now();
   rafId = requestAnimationFrame(tick);
 }
+
 export function stopLoop() {
   if (rafId === null) return;
   cancelAnimationFrame(rafId);
