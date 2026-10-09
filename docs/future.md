@@ -33,3 +33,20 @@ Mechanics planned for after the MVP. Not part of the current plan; see `design.m
 ## Dynamic location stats
 
 - Location stats are static data in the MVP. Other systems may affect them later.
+
+## Unlocking Machines and Products
+
+- MVP only requires unlocking Locations. Machines and Products will need unlocking later
+
+## Sales rate
+
+- MVP uses a fixed sales rate per machine. Later it should be influenced by Location stats, and possibly other systems
+
+## Slot & Machine features
+
+- Products may require or benefit from Slot/Machine features, e.g. hot coffee only sells from heated slots, soda bottles sell for more from refrigerated slots
+
+## Machine management & persistence
+
+- Uninstalling machines back into Storage
+- Saving and loading the game
