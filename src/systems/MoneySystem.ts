@@ -5,6 +5,7 @@ import { BuyAction } from '../components/BuyAction';
 import { spawnActionError } from '../factories/Action-factory';
 import type { ErrorId, ErrorMeta } from '../shared/errors';
 import { OrderPrice } from '../components/OrderPrice';
+import { Paid } from '../components/Paid';
 
 export class MoneySystem extends System {
   constructor() {
@@ -30,10 +31,13 @@ export class MoneySystem extends System {
         continue;
       }
       if (money.value - cost < 0) {
-        this.showError(world, 'buyNotEnoughMoney', { amount: 100 });
+        this.showError(world, 'buyNotEnoughMoney', {
+          amount: cost - money.value,
+        });
         continue;
       }
       money.value -= cost;
+      world.addEntityComponents(entity, new Paid());
     }
   }
 

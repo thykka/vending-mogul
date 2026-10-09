@@ -27,6 +27,22 @@ export function spawnUnlockAction(world: World, unlockable: number): number {
   return action;
 }
 
+/** Unlocks `unlockable` only if `buyer` can pay its UnlockPrice. */
+export function spawnUnlockPurchase(
+  world: World,
+  buyer: number,
+  unlockable: number
+): number {
+  const action = world.createEntity();
+  world.addEntityComponents(
+    action,
+    new Action(),
+    new BuyAction(buyer, unlockable),
+    new UnlockAction(unlockable)
+  );
+  return action;
+}
+
 export function spawnBuyAction(
   world: World,
   buyer: number,
