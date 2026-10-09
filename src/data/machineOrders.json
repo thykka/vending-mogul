@@ -1,22 +1,22 @@
 {
   "gumball-single": {
     "price": 75,
-    "deliveryTime": 1,
+    "deliveryTime": 15,
     "machine": "gumball-single"
   },
   "gumball-row": {
     "price": 150,
-    "deliveryTime": 2,
+    "deliveryTime": 30,
     "machine": "gumball-row"
   },
   "gachapon-small": {
     "price": 250,
-    "deliveryTime": 3,
+    "deliveryTime": 30,
     "machine": "gachapon-small"
   },
   "gachapon-large": {
     "price": 400,
-    "deliveryTime": 4,
+    "deliveryTime": 45,
     "machine": "gachapon-large"
   }
 }
