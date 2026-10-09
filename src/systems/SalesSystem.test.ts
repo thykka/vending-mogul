@@ -1,6 +1,7 @@
 import { World } from '@jakeklassen/ecs';
 import { Money } from '@components/Money';
 import { MoneyLimit } from '@components/MoneyLimit';
+import { Sales } from '@components/Sales';
 import { Amount } from '@components/Amount';
 import { Children } from '@components/Children';
 import { Contents } from '@components/Contents';
@@ -38,6 +39,10 @@ function moneyOf(machine: number) {
 
 function amountOf(product: number) {
   return world.getEntityComponents(product)?.get(Amount)?.value;
+}
+
+function salesOf(machine: number) {
+  return world.getEntityComponents(machine)!.get(Sales)!;
 }
 
 function intervalOf(id: MachineId) {
@@ -128,5 +133,39 @@ describe('SalesSystem', () => {
 
     expect(amountOf(firstProduct)).toBe(10);
     expect(amountOf(lastProduct)).toBe(9);
+  });
+
+  it('should pause the sales interval while the machine has no products', () => {
+    const machine = spawnInstalledMachine();
+    world.update(intervalOf('gumball-single') / 2);
+    expect(salesOf(machine).elapsed).toBe(0);
+
+    const product = stock(slotsOf(machine)[0], 10);
+    world.update(intervalOf('gumball-single') - 1);
+    expect(amountOf(product)).toBe(10);
+    world.update(1);
+    expect(amountOf(product)).toBe(9);
+  });
+
+  it('should pause the sales interval while the money limit is reached', () => {
+    const machine = spawnInstalledMachine();
+    stock(slotsOf(machine)[0], 10);
+    const limit = world.getEntityComponents(machine)!.get(MoneyLimit)!.value;
+    moneyOf(machine).value = limit;
+
+    world.update(intervalOf('gumball-single') / 2);
+
+    expect(salesOf(machine).elapsed).toBe(0);
+  });
+
+  it('should reset the sales interval once a sale blocks further sales', () => {
+    const machine = spawnInstalledMachine();
+    const product = stock(slotsOf(machine)[0], 2);
+
+    world.update(intervalOf('gumball-single') * 5);
+
+    expect(world.getEntityComponents(product)).toBeUndefined();
+    expect(moneyOf(machine).value).toBe(2 * salePrice);
+    expect(salesOf(machine).elapsed).toBe(0);
   });
 });

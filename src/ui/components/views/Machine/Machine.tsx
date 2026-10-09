@@ -7,6 +7,7 @@ import { LocationDataId, MachineDataId } from '@components/DataId';
 import { Parent } from '@components/Parent';
 import { Money } from '@components/Money';
 import { MoneyLimit } from '@components/MoneyLimit';
+import { Sales } from '@components/Sales';
 import { formatCurrency } from '@ui/utils/formatter';
 import { MachineSlot } from './MachineSlot';
 
@@ -29,6 +30,7 @@ export function MachineView() {
   const slots = [...(components.get(Children)?.entities ?? [])];
   const money = components.get(Money)?.value ?? 0;
   const moneyLimit = components.get(MoneyLimit)?.value ?? 0;
+  const sales = components.get(Sales);
   return (
     <Flex>
       <h2>{id}</h2>
@@ -36,6 +38,14 @@ export function MachineView() {
       <span>
         Money: {formatCurrency(money)} / {formatCurrency(moneyLimit)}
       </span>
+      {sales && (
+        <Flex horizontal gap>
+          <Flex verticalCenter>Next sale</Flex>
+          <Flex fit center>
+            <progress value={sales.elapsed} max={sales.interval} />
+          </Flex>
+        </Flex>
+      )}
       <h3>Slots</h3>
       {slots.map((slot) => (
         <MachineSlot slot={slot} key={slot} />

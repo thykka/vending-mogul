@@ -23,6 +23,7 @@ Minimal playable loop: order machine → deliver to Storage → install at Locat
 - Only Locations need unlocking. Machines and Products are orderable from the start
 - Sales rate is fixed per machine (`salesInterval` in `machines.json`, seconds). Each interval the machine sells one item from a randomly picked stocked slot
 - Machines hold Money up to `moneyLimit` (`machines.json`). A sale that would exceed the limit doesn't happen, so a full machine stops selling until collected
+- The sales interval pauses while a machine has nothing it can sell (no stock, or every sale would exceed the limit). Machine view shows its progress
 - Products must exactly match Slot shape and dimensions
 - Storage holds one pool per product; deliveries merge into it. Stocking moves items from the pool into a Slot, up to the Slot's capacity
 - Machine view shows the last machine opened from the Map; the Machine tab is disabled until then
