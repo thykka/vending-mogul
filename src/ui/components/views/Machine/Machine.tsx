@@ -9,6 +9,8 @@ import { Money } from '@components/Money';
 import { MoneyLimit } from '@components/MoneyLimit';
 import { Sales } from '@components/Sales';
 import { formatCurrency } from '@ui/utils/formatter';
+import { Player } from '@components/Player';
+import { spawnCollectAction } from '@factories/Action-factory';
 import { MachineSlot } from './MachineSlot';
 
 export function MachineView() {
@@ -35,9 +37,24 @@ export function MachineView() {
     <Flex>
       <h2>{id}</h2>
       {location && <span>at {location}</span>}
-      <span>
-        Money: {formatCurrency(money)} / {formatCurrency(moneyLimit)}
-      </span>
+      <Flex horizontal gap>
+        <Flex fit verticalCenter>
+          Money: {formatCurrency(money)} / {formatCurrency(moneyLimit)}
+        </Flex>
+        <Flex
+          pad
+          theme="invert"
+          type="button"
+          disabled={money <= 0}
+          onClick={() => {
+            const player = game.findEntity(Player);
+            if (player !== undefined && viewedMachine !== null)
+              spawnCollectAction(game, viewedMachine, player);
+          }}
+        >
+          Collect
+        </Flex>
+      </Flex>
       {sales && (
         <Flex horizontal gap>
           <Flex verticalCenter>Next sale</Flex>

@@ -39,4 +39,4 @@ Minimal playable loop: order machine → deliver to Storage → install at Locat
 5. ✅ Installing: Map view lists unlocked Locations and machine slots; install from Storage
 6. ✅ Stocking: Machine view stocks products into a matching Slot, up to its capacity
 7. ✅ Sales: sell from stocked slots at a fixed rate, accumulate Money up to the limit
-8. Collecting: Collect button in Machine view
+8. ✅ Collecting: Collect button in Machine view

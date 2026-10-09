@@ -7,6 +7,7 @@ import { ActionSystem } from '@systems/ActionSystem';
 import { OrderSystem } from '@systems/OrderSystem';
 import { InstallSystem } from '@systems/InstallSystem';
 import { StockSystem } from '@systems/StockSystem';
+import { CollectSystem } from '@systems/CollectSystem';
 import { TimerSystem } from '@systems/TimerSystem';
 import { ActionErrorSystem } from '@systems/ActionErrorSystem';
 import { DeliverySystem } from '@systems/DeliverySystem';
@@ -29,6 +30,7 @@ export function spawnGame(): World {
   world.addSystem(new OrderSystem());
   world.addSystem(new InstallSystem());
   world.addSystem(new StockSystem());
+  world.addSystem(new CollectSystem());
   world.addSystem(new ActionSystem());
 
   world.addSystem(new TimerSystem());
