@@ -15,10 +15,8 @@ export function OrdersView() {
           const remaining = Math.ceil((timer.duration - timer.elapsed) / 1000);
           return (
             <Flex horizontal pad fit gap key={entity}>
-              <Flex fit verticalCenter>
-                {id}
-              </Flex>
-              <Flex center>
+              <Flex verticalCenter>{id}</Flex>
+              <Flex fit center>
                 <progress value={timer.progress} max={1} />
               </Flex>
               <Flex center>{remaining}s</Flex>

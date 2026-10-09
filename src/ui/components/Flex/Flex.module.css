@@ -61,3 +61,7 @@
   color: var(--theme-invert-color);
   background-color: var(--theme-invert-background);
 }
+
+.flex > progress {
+  width: 100%;
+}
