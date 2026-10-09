@@ -1,10 +1,14 @@
 import { createContext, useContext } from 'react';
 import type { EntityId } from '@jakeklassen/ecs';
+import type { ShopViewId } from '@ui/components/views/Shop/Shop';
 
 type Navigation = {
   /** Last machine opened in the Machine view, if any. */
   viewedMachine: EntityId | null;
   viewMachine: (machine: EntityId) => void;
+  /** Last selected Shop tab, kept while other views are open. */
+  shopTab: ShopViewId;
+  setShopTab: (tab: ShopViewId) => void;
 };
 
 export const NavigationContext = createContext<Navigation | null>(null);

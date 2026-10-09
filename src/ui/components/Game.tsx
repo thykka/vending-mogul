@@ -8,10 +8,12 @@ import type { EntityId } from '@jakeklassen/ecs';
 import { ViewList, ViewPanel, type ViewId } from './View/View.js';
 import { Views } from './views/index.js';
 import { ActionErrors } from './ActionErrors/ActionErrors.js';
+import type { ShopViewId } from './views/Shop/Shop';
 
 export function Game() {
   const [currentView, setCurrentView] = useState<ViewId<typeof Views>>('shop');
   const [viewedMachine, setViewedMachine] = useState<EntityId | null>(null);
+  const [shopTab, setShopTab] = useState<ShopViewId>('locations');
   const viewMachine = (machine: EntityId) => {
     setViewedMachine(machine);
     setCurrentView('machine');
@@ -23,7 +25,9 @@ export function Game() {
 
   return (
     <GameContext.Provider value={game}>
-      <NavigationContext.Provider value={{ viewedMachine, viewMachine }}>
+      <NavigationContext.Provider
+        value={{ viewedMachine, viewMachine, shopTab, setShopTab }}
+      >
         <Flex fit clip pad>
           <Flex horizontal gap type="section">
             <Flex center>Clock</Flex>
