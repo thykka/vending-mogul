@@ -3,7 +3,7 @@ import { Action } from '@components/Action';
 import { UnlockAction } from '@components/UnlockAction';
 import { BuyAction } from '@components/BuyAction';
 import { ActionError } from '@components/ActionError';
-import { Timer } from '@components/timer';
+import { Timer } from '@components/Timer';
 import { InstallAction } from '@components/InstallAction';
 import { StockAction } from '@components/StockAction';
 import { CollectAction } from '@components/CollectAction';

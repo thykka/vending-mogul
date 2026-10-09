@@ -1,7 +1,7 @@
 import { World } from '@jakeklassen/ecs';
 import { Money } from '@components/Money';
 import { Order } from '@components/Order';
-import { Timer } from '@components/timer';
+import { Timer } from '@components/Timer';
 import { ActionError } from '@components/ActionError';
 import { spawnOrderPurchase } from '@factories/Order-factory';
 import { loadData } from '@data/registry';

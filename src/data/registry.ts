@@ -18,13 +18,13 @@ export const DataRegistry = Object.freeze({
 
 export type DataRegistry = typeof DataRegistry;
 export type RegistrySource = keyof DataRegistry;
-export type DataId<Source extends RegistrySource> = keyof DataRegistry[Source] &
-  string;
+export type RegistryKey<Source extends RegistrySource> =
+  keyof DataRegistry[Source] & string;
 
 export function loadData<Source extends RegistrySource>(
   source: Source,
-  id: DataId<Source>
-): DataRegistry[Source][DataId<Source>] {
+  id: RegistryKey<Source>
+): DataRegistry[Source][RegistryKey<Source>] {
   const table = DataRegistry[source];
   if (!(id in table)) throw new Error(`Unknown ${source} id: ${id}`);
   return table[id];
@@ -33,32 +33,33 @@ export function loadData<Source extends RegistrySource>(
 export function allData<Source extends RegistrySource>(
   source: Source
 ): DataRegistry[Source] {
-  if (!(source in DataRegistry))
-    throw new Error(`Unknown data source: ${source}`);
   return DataRegistry[source];
 }
 
 export function allIds<Source extends RegistrySource>(
   source: Source
-): DataId<Source>[] {
-  if (!(source in DataRegistry))
-    throw new Error(`Unknown data source: ${source}`);
-  return Object.keys(DataRegistry[source]) as DataId<Source>[];
+): RegistryKey<Source>[] {
+  return Object.keys(DataRegistry[source]) as RegistryKey<Source>[];
 }
 
-export type ProductId = DataId<'products'>;
-export type SpriteId = DataId<'sprites'>;
-export type MachineId = DataId<'machines'>;
-export type LocationId = DataId<'locations'>;
-export type SlotId = DataId<'slots'>;
-export type MachineOrderId = DataId<'machineOrders'>;
-export type ProductOrderId = DataId<'productOrders'>;
+export type ProductId = RegistryKey<'products'>;
+export type SpriteId = RegistryKey<'sprites'>;
+export type MachineId = RegistryKey<'machines'>;
+export type LocationId = RegistryKey<'locations'>;
+export type SlotId = RegistryKey<'slots'>;
+export type MachineOrderId = RegistryKey<'machineOrders'>;
+export type ProductOrderId = RegistryKey<'productOrders'>;
 
 export type OrderSource = 'machineOrders' | 'productOrders';
 
 /** Fields shared by every kind of order. */
 export type OrderData = { price: number; deliveryTime: number };
 
+/**
+ * `loadData` for either kind of order. TypeScript can't resolve the fields of
+ * `loadData(source, id)` while `source` is a generic OrderSource, so this reads
+ * the table as OrderData, which also checks that both tables provide its fields.
+ */
 export function loadOrderData(source: OrderSource, id: string): OrderData {
   const table: Record<string, OrderData> = DataRegistry[source];
   if (!(id in table)) throw new Error(`Unknown ${source} id: ${id}`);

@@ -6,13 +6,13 @@ import { Parent } from '@components/Parent';
 import { Children } from '@components/Children';
 import { Contents } from '@components/Contents';
 import { Amount } from '@components/Amount';
-import { Price } from '@components/Price';
+import { SalePrice } from '@components/SalePrice';
 
 type StockedSlot = {
   contents: Contents;
   product: EntityId;
   amount: Amount;
-  price: Price;
+  price: SalePrice;
 };
 
 /**
@@ -79,7 +79,7 @@ export class SalesSystem extends System {
       const product = contents.item;
       const productComponents = world.getEntityComponents(product);
       const amount = productComponents?.get(Amount);
-      const price = productComponents?.get(Price);
+      const price = productComponents?.get(SalePrice);
       if (amount && price) stocked.push({ contents, product, amount, price });
     }
     return stocked;

@@ -4,7 +4,7 @@ import { ProductDataId } from '@components/DataId';
 
 import { Amount } from '@components/Amount';
 import { Position } from '@components/Position';
-import { Price } from '@components/Price';
+import { SalePrice } from '@components/SalePrice';
 import { Sprite } from '@components/Sprite';
 import { Shape } from '@components/Shape';
 import { Size } from '@components/Size';
@@ -25,7 +25,7 @@ export function spawnProductStack(
     new ProductDataId(id),
     new Amount(amount),
     new Position(x, y),
-    new Price(productData.salePrice),
+    new SalePrice(productData.salePrice),
     new Sprite(...spriteData.source),
     new Shape(productData.shape),
     new Size(productData.width, productData.height)

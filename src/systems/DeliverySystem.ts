@@ -1,6 +1,6 @@
 import { System, World } from '@jakeklassen/ecs';
 import { Order } from '@components/Order';
-import { Timer } from '@components/timer';
+import { Timer } from '@components/Timer';
 import { Stored } from '@components/Stored';
 import { Amount } from '@components/Amount';
 import { ProductDataId } from '@components/DataId';

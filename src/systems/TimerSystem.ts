@@ -1,5 +1,5 @@
 import { System, type World } from '@jakeklassen/ecs';
-import { Timer } from '@components/timer';
+import { Timer } from '@components/Timer';
 
 export class TimerSystem extends System {
   constructor() {

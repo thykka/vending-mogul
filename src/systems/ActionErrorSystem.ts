@@ -1,6 +1,6 @@
 import { System, World } from '@jakeklassen/ecs';
 import { ActionError } from '@components/ActionError';
-import { Timer } from '@components/timer';
+import { Timer } from '@components/Timer';
 
 /** Removes ActionErrors once their Timer completes. */
 export class ActionErrorSystem extends System {

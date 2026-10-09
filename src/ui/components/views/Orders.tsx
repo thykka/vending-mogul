@@ -1,7 +1,7 @@
 import { Flex } from '@ui/components/Flex/Flex';
 import { useGameView } from '@ui/hooks/useGameView';
 import { Order } from '@components/Order';
-import { Timer } from '@components/timer';
+import { Timer } from '@components/Timer';
 
 export function OrdersView() {
   const orders = useGameView(Order, Timer);
