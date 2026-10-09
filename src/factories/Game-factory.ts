@@ -1,4 +1,4 @@
-import { World } from '@jakeklassen/ecs';
+import { EntityId, World } from '@jakeklassen/ecs';
 import { spawnPlayer } from './Player-factory';
 import { spawnLocations } from './Location-factory';
 import { MoneySystem } from '@systems/MoneySystem';
@@ -16,8 +16,9 @@ import { SalesSystem } from '@systems/SalesSystem';
 export function spawnGame(): World {
   const world = new World();
   // Debugging helpers for inspecting the game from the browser console
-  globalThis.world = world;
-  globalThis.player = spawnPlayer(world);
+  (globalThis as typeof globalThis & { world: World }).world = world;
+  (globalThis as typeof globalThis & { player: EntityId }).player =
+    spawnPlayer(world);
   spawnLocations(world);
   // Systems run in this order on every update, reacting to each other's output:
   // - MoneySystem marks affordable BuyActions as Paid, and Unlock/OrderSystem

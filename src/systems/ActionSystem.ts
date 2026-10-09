@@ -10,7 +10,7 @@ export class ActionSystem extends System {
     this.cleanupActions(world);
   }
 
-  cleanupActions(world) {
+  cleanupActions(world: World) {
     for (const [entity, components] of world.view(Action)) {
       world.deleteEntity(entity);
     }
