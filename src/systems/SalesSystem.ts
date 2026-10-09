@@ -39,6 +39,8 @@ export class SalesSystem extends System {
       const children = components.get(Children);
       if (!this.canSell(world, money, limit, children)) continue;
       sales.elapsed += dt;
+      // Catch up on every interval that passed. If a sale leaves nothing that
+      // can be sold, the interval restarts from zero, as if it had been paused
       while (sales.elapsed >= sales.interval) {
         sales.elapsed -= sales.interval;
         this.sell(world, money, limit, children);

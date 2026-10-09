@@ -10,7 +10,7 @@ import { Shape } from '@components/Shape';
 import { Size } from '@components/Size';
 import { Stored } from '@components/Stored';
 import { spawnStockAction } from '@factories/Action-factory';
-import { fitsSlot } from '@shared/queries';
+import { canStock, slotStack } from '@shared/queries';
 
 export function MachineSlot({ slot }: { slot: EntityId }) {
   const game = useGame();
@@ -21,16 +21,11 @@ export function MachineSlot({ slot }: { slot: EntityId }) {
   if (!slotComponents || !contents) return null;
   const shape = slotComponents.get(Shape)?.id;
   const size = slotComponents.get(Size);
-  const stocked =
-    contents.item === null
-      ? undefined
-      : game.getEntityComponents(contents.item);
+  const stocked = slotStack(game, slotComponents);
   const stockedId = stocked?.get(ProductDataId)?.id;
   const amount = stocked?.get(Amount)?.value ?? 0;
-  const stockable = storedProducts.filter(
-    ([_product, components]) =>
-      fitsSlot(components, slotComponents) &&
-      (!stockedId || components.get(ProductDataId).id === stockedId)
+  const stockable = storedProducts.filter(([_product, components]) =>
+    canStock(game, components, slotComponents)
   );
   return (
     <Flex pad gap>

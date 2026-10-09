@@ -1,13 +1,12 @@
 import { System, World } from '@jakeklassen/ecs';
 import { StockAction } from '@components/StockAction';
-import { Stored } from '@components/Stored';
 import { Amount } from '@components/Amount';
 import { Contents } from '@components/Contents';
 import { ProductDataId } from '@components/DataId';
 import { ProductCapacity } from '@components/ProductCapacity';
 import { spawnActionError } from '@factories/Action-factory';
 import { spawnProductStack } from '@factories/Product-factory';
-import { fitsSlot } from '@shared/queries';
+import { slotStack, stockError } from '@shared/queries';
 
 /** Moves stored products into machine Slots, up to each Slot's capacity. */
 export class StockSystem extends System {
@@ -32,29 +31,16 @@ export class StockSystem extends System {
         spawnActionError(world, 'noEntity', { entity: slot });
         continue;
       }
-      if (!productComponents.get(Stored)) {
-        spawnActionError(world, 'stockNotStored', {});
+      const error = stockError(world, productComponents, slotComponents);
+      if (error) {
+        spawnActionError(world, error, {});
         continue;
       }
-      if (!fitsSlot(productComponents, slotComponents)) {
-        spawnActionError(world, 'stockNoFit', {});
-        continue;
-      }
-      const current =
-        contents.item === null
-          ? undefined
-          : world.getEntityComponents(contents.item);
-      if (current && current.get(ProductDataId)?.id !== productId) {
-        spawnActionError(world, 'stockSlotOccupied', {});
-        continue;
-      }
-      const stocked = current?.get(Amount);
-      const space = capacity.value - (stocked?.value ?? 0);
-      if (space <= 0) {
-        spawnActionError(world, 'stockSlotFull', {});
-        continue;
-      }
-      const moved = Math.min(space, stored.value);
+      const stocked = slotStack(world, slotComponents)?.get(Amount);
+      const moved = Math.min(
+        capacity.value - (stocked?.value ?? 0),
+        stored.value
+      );
       stored.value -= moved;
       if (stocked) stocked.value += moved;
       else contents.item = spawnProductStack(world, productId, moved);
