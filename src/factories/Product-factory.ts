@@ -14,7 +14,7 @@ export function spawnProductStack(
   x = 0,
   y = 0,
   amount?: number
-): void {
+): number {
   const productData = loadData('products', id);
   const spriteData = loadData('sprites', productData.sprite as SpriteId);
 
@@ -28,4 +28,5 @@ export function spawnProductStack(
     new Sprite(...spriteData.source),
     new Shape(productData.shape)
   );
+  return entity;
 }

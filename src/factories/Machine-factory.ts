@@ -8,7 +8,11 @@ import { Contents } from '@components/Contents';
 import { Money } from '@components/Money';
 import { Children } from '@components/Children';
 
-export function spawnMachine(world: World, id: MachineId, parent?: EntityId) {
+export function spawnMachine(
+  world: World,
+  id: MachineId,
+  parent?: EntityId
+): number {
   const machineData = loadData('machines', id);
   const machine = world.createEntity();
   const children = new Children();
@@ -34,4 +38,5 @@ export function spawnMachine(world: World, id: MachineId, parent?: EntityId) {
       children.entities.add(slot);
     });
   });
+  return machine;
 }

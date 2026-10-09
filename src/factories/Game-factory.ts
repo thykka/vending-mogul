@@ -7,6 +7,7 @@ import { ActionSystem } from '@systems/ActionSystem';
 import { OrderSystem } from '@systems/OrderSystem';
 import { TimerSystem } from '@systems/TimerSystem';
 import { ActionErrorSystem } from '@systems/ActionErrorSystem';
+import { DeliverySystem } from '@systems/DeliverySystem';
 
 export function spawnGame(): World {
   const world = new World();
@@ -20,5 +21,6 @@ export function spawnGame(): World {
   world.addSystem(new ActionSystem());
   world.addSystem(new TimerSystem());
   world.addSystem(new ActionErrorSystem());
+  world.addSystem(new DeliverySystem());
   return world;
 }
