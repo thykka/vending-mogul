@@ -1,4 +1,6 @@
-button, input, textarea {
+button,
+input,
+textarea {
   appearance: none;
   color: currentColor;
   background-color: transparent;

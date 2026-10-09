@@ -32,12 +32,12 @@ Constructs:
 
 - ButtonSystem:
   - Iterate through Buttons:
-    - If Cursor Position *collides* with Button Position & Size:
+    - If Cursor Position _collides_ with Button Position & Size:
       - If Button is `held` and Cursor is `released`:
         - Read Button ActionIntent and create an ActionEvent
         - Unset Button `held`
       - If Cursor is `pressed`, set Button as `held`
-    - Cursor doesn't *collide* with Button:
+    - Cursor doesn't _collide_ with Button:
       - If Button is `held`, unset Button `held`
 
 - ActionSystem:
@@ -50,22 +50,27 @@ Constructs:
 ## What kinds of actions do we actually need for each view?
 
 ### Global/Player
+
 - Switch View (Contracts / Warehouse / Locations / Machines)
 
 ### Contracts
+
 - Signing Contracts:
   - Subtract Player Money
   - Add Delivery into Player ActiveDeliveries?
 
 ### Warehouse
+
 - Purchasing Products (via Contract): Create Product into Warehouse ProductSlot
 - Purchasing Machines (via Contract): Create Machine into Warehouse MachineSlot
 - Tossing Products: Remove Product from Warehouse ProductSlot
 - Selling Machines: Remove Machine from Warehouse MachineSlot, Add Player Money
 
 ### Location
+
 - Installing Machinges: Move Machine from Warehouse MachineSlot into Location MachineSlot
 
 ### Machine
+
 - Stocking Products: Move Product from Warehouse ProductSlot into Machine ProductSlot
 - Collecting earnings: Move Machine Change into Player Money
