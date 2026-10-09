@@ -1,10 +1,12 @@
-import { useGameView } from '../../hooks/useGameView.js';
-import { Name } from '../../../components/Name.js';
-import { Money } from '../../../components/Money.js';
-import { Flex } from '../Flex/Flex.js';
+import { useGameView } from '@ui/hooks/useGameView';
+import { Name } from '@components/Name';
+import { Money } from '@components/Money';
+import { Player } from '@components/Player';
+import { Flex } from '@ui/components/Flex/Flex';
+import { formatCurrency } from '@ui/utils/formatter';
 
 export function PlayerStats() {
-  const [[_player, components]] = useGameView(Name, Money);
+  const [[_player, components]] = useGameView(Player, Name, Money);
   const name = components.get(Name).text;
   const money = components.get(Money).value;
   return (
@@ -13,7 +15,7 @@ export function PlayerStats() {
         {name}
       </Flex>
       <Flex center type="span">
-        money: {money}
+        money: {formatCurrency(money)}
       </Flex>
     </Flex>
   );

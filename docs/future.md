@@ -21,7 +21,7 @@ Mechanics planned for after the MVP. Not part of the current plan; see `design.m
 
 ## Order delivery methods
 
-- Order delivery methods can change stack sizes, delivery time, e.g. Bike courier, Van, Truck, Ship
+- Order delivery methods can change order amounts, delivery time, e.g. Bike courier, Van, Truck, Ship
 
 ### Example Orders
 
@@ -33,3 +33,27 @@ Mechanics planned for after the MVP. Not part of the current plan; see `design.m
 ## Dynamic location stats
 
 - Location stats are static data in the MVP. Other systems may affect them later.
+
+## Unlocking Machines and Products
+
+- MVP only requires unlocking Locations. Machines and Products will need unlocking later
+
+## Sales rate
+
+- MVP uses a fixed sales rate per machine. Later it should be influenced by Location stats, and possibly other systems
+
+## Slot & Machine features
+
+- Products may require or benefit from Slot/Machine features, e.g. hot coffee only sells from heated slots, soda bottles sell for more from refrigerated slots
+
+## Machine management & persistence
+
+- Uninstalling machines back into Storage
+- Saving and loading the game
+
+## Known issues
+
+Accepted for the MVP, to fix when the related mechanics are revisited.
+
+- Sales pick a random stocked Slot before checking the money limit, so a Slot whose sale would exceed the limit wastes an interval while another Slot could still sell. Pick only from sellable Slots when random slot selection is replaced (`SalesSystem.sell`)
+- Collecting doesn't check that the target is an installed machine or that the collector is the player; any entity with Money works (`CollectSystem`)

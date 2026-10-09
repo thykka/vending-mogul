@@ -18,6 +18,15 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "outDir": "build",
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@systems/*": ["./src/systems/*"],
+      "@factories/*": ["./src/factories/*"],
+      "@data/*": ["./src/data/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@ui/*": ["./src/ui/*"],
+      "@/*": ["./src/*"]
+    },
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "resolveJsonModule": true,
     "resolvePackageJsonImports": true,

@@ -1,0 +1,22 @@
+{
+  "bubblegumbox": {
+    "price": 25,
+    "deliveryTime": 5,
+    "products": [
+      {
+        "product": "bubblegum",
+        "amount": 50
+      }
+    ]
+  },
+  "bouncyballbox": {
+    "price": 60,
+    "deliveryTime": 8,
+    "products": [
+      {
+        "product": "bouncyball",
+        "amount": 50
+      }
+    ]
+  }
+}

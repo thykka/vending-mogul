@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { ViewId, ViewList, ViewPanel } from '../../View/View';
-import { Flex } from '../../Flex/Flex';
+import { ViewId, ViewList, ViewPanel } from '@ui/components/View/View';
+import { Flex } from '@ui/components/Flex/Flex';
+import { useNavigation } from '@ui/context/NavigationContext';
 import { ShopLocationsView } from './Locations';
 import { ShopMachinesView } from './Machines';
 import { ShopProductsView } from './Products';
@@ -25,9 +25,10 @@ const ShopViews = {
   },
 };
 
+export type ShopViewId = ViewId<typeof ShopViews>;
+
 export function ShopView() {
-  const [currentView, setCurrentView] =
-    useState<ViewId<typeof ShopViews>>('locations');
+  const { shopTab: currentView, setShopTab: setCurrentView } = useNavigation();
 
   return (
     <Flex>

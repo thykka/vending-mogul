@@ -1,5 +1,5 @@
 import { System, World } from '@jakeklassen/ecs';
-import { Action } from '../components/Action';
+import { Action } from '@components/Action';
 
 export class ActionSystem extends System {
   constructor() {

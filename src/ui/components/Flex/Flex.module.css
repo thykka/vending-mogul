@@ -47,6 +47,11 @@
   overflow: auto;
 }
 
+.flex:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .theme-default {
   background-color: transparent;
   color: currentColor;
@@ -55,4 +60,8 @@
 .theme-invert {
   color: var(--theme-invert-color);
   background-color: var(--theme-invert-background);
+}
+
+.flex > progress {
+  width: 100%;
 }

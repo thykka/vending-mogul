@@ -26,5 +26,8 @@ dist/
 # Optional eslint cache
 .eslintcache
 
+# Claude launch environment
+.claude/launch.json
+
 # Misc
 .DS_Store

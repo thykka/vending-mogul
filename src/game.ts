@@ -1,4 +1,4 @@
-import { spawnGame } from './factories/Game-factory.js';
+import { spawnGame } from '@factories/Game-factory';
 
 export const game = spawnGame();
 

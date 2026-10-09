@@ -1,13 +1,23 @@
-import { game, startLoop, stopLoop } from '../../game.js';
-import { Flex } from './Flex/Flex.js';
-import { GameContext } from '../context/GameContext.jsx';
-import { PlayerStats } from './Player/PlayerStats.jsx';
+import { game, startLoop, stopLoop } from '@/game';
+import { Flex } from '@ui/components/Flex/Flex';
+import { GameContext } from '@ui/context/GameContext';
+import { NavigationContext } from '@ui/context/NavigationContext';
+import { PlayerStats } from '@ui/components/Player/PlayerStats';
 import { useEffect, useState } from 'react';
-import { ViewList, ViewPanel, type ViewId } from './View/View.js';
-import { Views } from './views/index.js';
+import type { EntityId } from '@jakeklassen/ecs';
+import { ViewList, ViewPanel, type ViewId } from '@ui/components/View/View';
+import { Views } from '@ui/components/views';
+import { ActionErrors } from '@ui/components/ActionErrors/ActionErrors';
+import type { ShopViewId } from '@ui/components/views/Shop/Shop';
 
 export function Game() {
   const [currentView, setCurrentView] = useState<ViewId<typeof Views>>('shop');
+  const [viewedMachine, setViewedMachine] = useState<EntityId | null>(null);
+  const [shopTab, setShopTab] = useState<ShopViewId>('locations');
+  const viewMachine = (machine: EntityId) => {
+    setViewedMachine(machine);
+    setCurrentView('machine');
+  };
   useEffect(() => {
     startLoop();
     return () => stopLoop();
@@ -15,49 +25,56 @@ export function Game() {
 
   return (
     <GameContext.Provider value={game}>
-      <Flex fit clip pad>
-        <Flex horizontal gap type="section">
-          <Flex center>Clock</Flex>
-          <Flex horizontal fit>
-            <Flex pad type="h1">
-              Vending Mogul
+      <NavigationContext.Provider
+        value={{ viewedMachine, viewMachine, shopTab, setShopTab }}
+      >
+        <Flex fit clip pad>
+          <Flex horizontal gap type="section">
+            <Flex center>Clock</Flex>
+            <Flex horizontal fit>
+              <Flex pad type="h1">
+                Vending Mogul
+              </Flex>
+              <PlayerStats />
             </Flex>
-            <PlayerStats />
+            <Flex center>Menu</Flex>
           </Flex>
-          <Flex center>Menu</Flex>
-        </Flex>
-        <Flex fit scroll type="section">
-          <ViewPanel views={Views} viewId={currentView} />
-        </Flex>
-        <Flex type="nav">
-          <Flex horizontal gap type="ul">
-            <ViewList
-              views={Views}
-              current={currentView}
-              onChange={setCurrentView}
-              renderItem={({ viewId, view, isActive, select }) => (
-                <Flex fit type="li" key={viewId}>
-                  {isActive ? (
-                    <Flex pad center key={viewId} theme="invert">
-                      {view.name}
-                    </Flex>
-                  ) : (
-                    <Flex
-                      pad
-                      center
-                      key={viewId}
-                      type="button"
-                      onClick={select}
-                    >
-                      {view.name}
-                    </Flex>
-                  )}
-                </Flex>
-              )}
-            />
+          <ActionErrors />
+          <Flex fit scroll type="section">
+            <ViewPanel views={Views} viewId={currentView} />
+          </Flex>
+          <Flex type="nav">
+            <Flex horizontal gap type="ul">
+              <ViewList
+                views={Views}
+                current={currentView}
+                onChange={setCurrentView}
+                renderItem={({ viewId, view, isActive, select }) => (
+                  <Flex fit type="li" key={viewId}>
+                    {isActive ? (
+                      <Flex pad center theme="invert">
+                        {view.name}
+                      </Flex>
+                    ) : (
+                      <Flex
+                        pad
+                        center
+                        type="button"
+                        onClick={select}
+                        disabled={
+                          viewId === 'machine' && viewedMachine === null
+                        }
+                      >
+                        {view.name}
+                      </Flex>
+                    )}
+                  </Flex>
+                )}
+              />
+            </Flex>
           </Flex>
         </Flex>
-      </Flex>
+      </NavigationContext.Provider>
     </GameContext.Provider>
   );
 }

@@ -1,7 +1,7 @@
-import { LocationsView } from './Locations';
-import { MachineView } from './Machine';
+import { MachineView } from '@ui/components/views/Machine/Machine';
+import { MapView } from './Map';
 import { OrdersView } from './Orders';
-import { ShopView } from './Shop/Shop';
+import { ShopView } from '@ui/components/views/Shop/Shop';
 import { StorageView } from './Storage';
 
 export const Views = {
@@ -19,7 +19,7 @@ export const Views = {
   },
   map: {
     name: 'Map',
-    component: LocationsView,
+    component: MapView,
   },
   machine: {
     name: 'Machine',

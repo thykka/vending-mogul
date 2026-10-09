@@ -1,15 +1,15 @@
-import type { World } from '@jakeklassen/ecs';
-import { Name } from '../components/Name.js';
-import { Money } from '../components/Money.js';
-import { Player } from '../components/Player.js';
+import type { EntityId, World } from '@jakeklassen/ecs';
+import { Name } from '@components/Name';
+import { Money } from '@components/Money';
+import { Player } from '@components/Player';
 
-export function spawnPlayer(world: World, name = 'Anonymous'): number {
+export function spawnPlayer(world: World, name = 'Anonymous'): EntityId {
   const player = world.createEntity();
   world.addEntityComponents(
     player,
     new Player(),
     new Name(name),
-    new Money(100)
+    new Money(125)
   );
   return player;
 }

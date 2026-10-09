@@ -10,7 +10,7 @@ Post-MVP ideas live in `future.md`.
 
 - Game populates all locations, machines and products at start with a "Locked" component. Unlocking removes this component, enabling purchases/orders.
 - Unlocking is a direct purchase
-- Player can spend money to order an unlocked machine or product stack. Orders arrive into Player's Storage
+- Player can spend money to order an unlocked machine or products. Orders arrive into Player's Storage
 
 ## Locations
 
@@ -48,7 +48,7 @@ Post-MVP ideas live in `future.md`.
 
 ## Slots
 
-- A stack of products can be inserted into a slot
+- Products can be stocked into a slot, up to the slot's capacity
 - Machines with stocked slots sell single products over time (simulated, later?)
 - Slots have features which determine which products can be inserted
 - UI: Slots are sprites drawn on top of machine frame.
@@ -58,18 +58,17 @@ Post-MVP ideas live in `future.md`.
 - Size (tiny, small, medium, large)
 - Shape (ball, box, cylinder, bag...)
 - Temperature (cooled, heated)
-- Product stack size (1-100?)
+- Capacity: how many products the slot holds (1-100?)
 
 ## Products
 
-- A stack of products can be ordered from the shop
-- Products have a preset retail price & order price
-- Products have an order stack size*
+- Products can be ordered from the shop
+- Products have a preset retail price
 - UI: Sprites drawn as icons in menus, or in product slots
 
 ### Example products
 
-- Bubblegum (tiny ball): first product to unlock. Only fits bubblegum dispenser. Large stack size.
+- Bubblegum (tiny ball): first product to unlock. Only fits bubblegum dispenser, whose slots have a large capacity.
 - Bouncy ball (small ball): Upgrade from bubblegum.
 - Jewelry ball (small ball): Better sale price.
 
@@ -80,12 +79,11 @@ Post-MVP ideas live in `future.md`.
 
 ### Example product features
 
-- Order price*
-- Order stack size*
 - Retail price: can be modified by Upgrades?
 
 ## Orders
 
-- Order can contain product stacks, or a machine
+- Order can contain products, or a machine
+- Orders have a price, delivery time and product amounts
 - Player might unlock orders, which are e.g. more profitable than earlier, similar orders.
 - Order might take some time to get delivered

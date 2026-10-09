@@ -1,14 +1,22 @@
 {
   "gumball-single": {
+    "moneyLimit": 50,
+    "salesInterval": 3,
     "slots": [["ball-s"]]
   },
   "gumball-row": {
+    "moneyLimit": 200,
+    "salesInterval": 3,
     "slots": [["ball-s", "ball-s", "ball-s", "ball-s"]]
   },
   "gachapon-small": {
+    "moneyLimit": 100,
+    "salesInterval": 4,
     "slots": [["ball-m"]]
   },
   "gachapon-large": {
+    "moneyLimit": 200,
+    "salesInterval": 4,
     "slots": [["ball-l"]]
   }
 }

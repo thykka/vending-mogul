@@ -1,8 +1,8 @@
 import { System, type World } from '@jakeklassen/ecs';
-import { Sprite } from '../components/Sprite.js';
-import { Position } from '../components/Position.js';
+import { Sprite } from '@components/Sprite';
+import { Position } from '@components/Position';
 
-import { allData } from '../data/registry.js';
+import { allData } from '@data/registry';
 
 const Sprites = allData('sprites');
 

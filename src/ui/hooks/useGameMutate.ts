@@ -1,6 +1,6 @@
 import type { Component, ComponentConstructor } from '@jakeklassen/ecs';
-import { useGame } from '../context/GameContext';
-import { notifyListeners } from '../../game';
+import { useGame } from '@ui/context/GameContext';
+import { notifyListeners } from '@/game';
 
 export function useGameMutate() {
   const game = useGame();
@@ -16,6 +16,5 @@ export function useGameMutate() {
       game.addEntityComponents(entity, ...components);
       notifyListeners();
     },
-    // modifyComponent: (entity: number, component: ComponentConstructor)
   };
 }
