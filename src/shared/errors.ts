@@ -8,6 +8,9 @@ export const Errors = {
     `Cannot buy: Missing ${formatCurrency(amount)}`,
   buyNoMoney: (_: NoMeta) => 'Cannot buy: Buyer has no Money',
   buyNoCost: (_: NoMeta) => 'Cannot buy: Target has no cost',
+  installNotStored: (_: NoMeta) => 'Cannot install: Machine is not in Storage',
+  installLocationLocked: (_: NoMeta) => 'Cannot install: Location is locked',
+  installLocationFull: (_: NoMeta) => 'Cannot install: Location is full',
 } as const;
 
 export type ErrorId = keyof typeof Errors;

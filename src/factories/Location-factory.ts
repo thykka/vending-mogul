@@ -4,8 +4,9 @@ import { LocationDataId } from '@components/DataId';
 import { Name } from '@components/Name';
 import { Locked } from '@components/Locked';
 import { UnlockPrice } from '@components/UnlockPrice';
+import { MachineCapacity } from '@components/MachineCapacity';
 
-export function spawnLocation(world: World, id: LocationId) {
+export function spawnLocation(world: World, id: LocationId): number {
   const locationData = {
     locked: true,
     ...loadData('locations', id),
@@ -15,9 +16,11 @@ export function spawnLocation(world: World, id: LocationId) {
     location,
     new LocationDataId(id),
     new Name(id),
-    new UnlockPrice(locationData.unlockCost)
+    new UnlockPrice(locationData.unlockCost),
+    new MachineCapacity(locationData.machinesMax)
   );
   if (locationData.locked) world.addEntityComponents(location, new Locked());
+  return location;
 }
 
 export function spawnLocations(world: World) {

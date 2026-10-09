@@ -22,7 +22,8 @@ export function spawnMachine(
     new Money(0),
     children
   );
-  if (parent) world.addEntityComponents(machine, new Parent(parent));
+  if (parent !== undefined)
+    world.addEntityComponents(machine, new Parent(parent));
   machineData.slots.forEach((row) => {
     row.forEach((slotId) => {
       const slotData = loadData('slots', slotId as SlotId);
