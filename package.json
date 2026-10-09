@@ -12,7 +12,7 @@
   "scripts": {
     "start": "rm -rf .parcel-cache && npx parcel src/index.html",
     "prebuild": "npm run lint",
-    "lint": "eslint . --ext .ts --ext .mts",
+    "lint": "eslint . --ext .ts --ext .mts --ext .tsx",
     "prettier": "prettier --config .prettierrc --write .",
     "test": "jest",
     "test:watch": "jest --watch",

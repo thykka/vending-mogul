@@ -6,7 +6,11 @@ import { Player } from '@components/Player';
 import { Money } from '@components/Money';
 import { formatCurrency } from '@ui/utils/formatter';
 import { spawnOrderPurchase } from '@factories/Order-factory';
-import { loadOrderData, type RegistryKey, type OrderSource } from '@data/registry';
+import {
+  loadOrderData,
+  type RegistryKey,
+  type OrderSource,
+} from '@data/registry';
 
 type ShopOrderProps<S extends OrderSource> = {
   source: S;

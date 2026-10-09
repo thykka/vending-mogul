@@ -6,10 +6,10 @@ import { useNavigation } from '@ui/context/NavigationContext';
 import { LocationDataId, MachineDataId } from '@components/DataId';
 import { MachineCapacity } from '@components/MachineCapacity';
 import { Locked } from '@components/Locked';
-import { Parent } from '@components/Parent';
 import { Stored } from '@components/Stored';
 import type { MachineId } from '@data/registry';
 import { spawnInstallAction } from '@factories/Action-factory';
+import { installedMachines } from '@shared/queries';
 
 /** One stored machine entity per machine type. */
 function useStoredMachineTypes() {
@@ -22,13 +22,12 @@ function useStoredMachineTypes() {
   return byType;
 }
 
-export function LocationsView() {
+export function MapView() {
   const game = useGame();
   const { viewMachine } = useNavigation();
   const locations = useGameView(LocationDataId, MachineCapacity).filter(
     ([_location, components]) => !components.get(Locked)
   );
-  const installed = useGameView(MachineDataId, Parent);
   const storedTypes = useStoredMachineTypes();
 
   return (
@@ -38,10 +37,7 @@ export function LocationsView() {
         locations.map(([location, components]) => {
           const { id } = components.get(LocationDataId);
           const capacity = components.get(MachineCapacity).value;
-          const machines = installed.filter(
-            ([_machine, machineComponents]) =>
-              machineComponents.get(Parent).entity === location
-          );
+          const machines = installedMachines(game, location);
           return (
             <Flex pad gap key={location}>
               <Flex horizontal gap>

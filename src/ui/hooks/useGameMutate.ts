@@ -16,6 +16,5 @@ export function useGameMutate() {
       game.addEntityComponents(entity, ...components);
       notifyListeners();
     },
-    // modifyComponent: (entity: number, component: ComponentConstructor)
   };
 }

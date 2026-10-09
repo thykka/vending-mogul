@@ -1,14 +1,14 @@
 import { game, startLoop, stopLoop } from '@/game';
-import { Flex } from './Flex/Flex.js';
+import { Flex } from '@ui/components/Flex/Flex';
 import { GameContext } from '@ui/context/GameContext';
 import { NavigationContext } from '@ui/context/NavigationContext';
-import { PlayerStats } from './Player/PlayerStats.jsx';
+import { PlayerStats } from '@ui/components/Player/PlayerStats';
 import { useEffect, useState } from 'react';
 import type { EntityId } from '@jakeklassen/ecs';
-import { ViewList, ViewPanel, type ViewId } from './View/View.js';
-import { Views } from './views/index.js';
-import { ActionErrors } from './ActionErrors/ActionErrors.js';
-import type { ShopViewId } from './views/Shop/Shop';
+import { ViewList, ViewPanel, type ViewId } from '@ui/components/View/View';
+import { Views } from '@ui/components/views';
+import { ActionErrors } from '@ui/components/ActionErrors/ActionErrors';
+import type { ShopViewId } from '@ui/components/views/Shop/Shop';
 
 export function Game() {
   const [currentView, setCurrentView] = useState<ViewId<typeof Views>>('shop');
@@ -52,14 +52,13 @@ export function Game() {
                 renderItem={({ viewId, view, isActive, select }) => (
                   <Flex fit type="li" key={viewId}>
                     {isActive ? (
-                      <Flex pad center key={viewId} theme="invert">
+                      <Flex pad center theme="invert">
                         {view.name}
                       </Flex>
                     ) : (
                       <Flex
                         pad
                         center
-                        key={viewId}
                         type="button"
                         onClick={select}
                         disabled={
