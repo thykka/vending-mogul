@@ -1,5 +1,7 @@
 # MVP plan
 
+Status: done. Kept as a record of the MVP's design decisions.
+
 Minimal playable loop: order machine → deliver to Storage → install at Location → order products → stock machine → sell over time → collect money → reinvest.
 
 ## Decisions

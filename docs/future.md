@@ -50,3 +50,10 @@ Mechanics planned for after the MVP. Not part of the current plan; see `design.m
 
 - Uninstalling machines back into Storage
 - Saving and loading the game
+
+## Known issues
+
+Accepted for the MVP, to fix when the related mechanics are revisited.
+
+- Sales pick a random stocked Slot before checking the money limit, so a Slot whose sale would exceed the limit wastes an interval while another Slot could still sell. Pick only from sellable Slots when random slot selection is replaced (`SalesSystem.sell`)
+- Collecting doesn't check that the target is an installed machine or that the collector is the player; any entity with Money works (`CollectSystem`)
