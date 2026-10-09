@@ -20,4 +20,4 @@ You'll need Node.js v20. With [nvm](https://github.com/nvm-sh/nvm), run `nvm ins
 
 Install dependencies with `npm i`
 
-Start the development server with `npm start`, then point your browser at https://localhost:1234/
+Start the development server with `npm start`, then point your browser at http://localhost:1234/
