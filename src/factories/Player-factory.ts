@@ -1,9 +1,9 @@
-import type { World } from '@jakeklassen/ecs';
+import type { EntityId, World } from '@jakeklassen/ecs';
 import { Name } from '@components/Name';
 import { Money } from '@components/Money';
 import { Player } from '@components/Player';
 
-export function spawnPlayer(world: World, name = 'Anonymous'): number {
+export function spawnPlayer(world: World, name = 'Anonymous'): EntityId {
   const player = world.createEntity();
   world.addEntityComponents(
     player,

@@ -1,39 +1,31 @@
-import type { World } from '@jakeklassen/ecs';
+import type { EntityId, World } from '@jakeklassen/ecs';
 import { loadOrderData, type DataId, type OrderSource } from '@data/registry';
-import { Action } from '@components/Action';
 import { BuyAction } from '@components/BuyAction';
-import { OrderPrice } from '@components/OrderPrice';
 import { OrderAction } from '@components/OrderAction';
 import { Order } from '@components/Order';
 import { Timer } from '@components/timer';
+import { spawnAction } from './Action-factory';
 
-/**
- * Places an Order only if `buyer` can pay its price.
- * The action itself carries the OrderPrice, so it is also the BuyAction's buyable.
- */
+/** Places an Order only if `buyer` can pay its price. */
 export function spawnOrderPurchase<S extends OrderSource>(
   world: World,
-  buyer: number,
+  buyer: EntityId,
   source: S,
   id: DataId<S>
-): number {
+): EntityId {
   const { price } = loadOrderData(source, id);
-  const action = world.createEntity();
-  world.addEntityComponents(
-    action,
-    new Action(),
-    new BuyAction(buyer, action),
-    new OrderPrice(price),
+  return spawnAction(
+    world,
+    new BuyAction(buyer, price),
     new OrderAction(source, id)
   );
-  return action;
 }
 
 export function spawnOrder<S extends OrderSource>(
   world: World,
   source: S,
   id: DataId<S>
-): number {
+): EntityId {
   const { deliveryTime } = loadOrderData(source, id);
   const order = world.createEntity();
   world.addEntityComponents(

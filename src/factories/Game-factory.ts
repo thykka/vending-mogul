@@ -15,6 +15,7 @@ import { SalesSystem } from '@systems/SalesSystem';
 
 export function spawnGame(): World {
   const world = new World();
+  // Debugging helpers for inspecting the game from the browser console
   globalThis.world = world;
   globalThis.player = spawnPlayer(world);
   spawnLocations(world);

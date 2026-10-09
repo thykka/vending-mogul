@@ -1,11 +1,9 @@
 import { World } from '@jakeklassen/ecs';
 import { Money } from '@components/Money';
-import { UnlockPrice } from '@components/UnlockPrice';
+import { Paid } from '@components/Paid';
 import { spawnBuyAction } from '@factories/Action-factory';
 import { MoneySystem } from './MoneySystem';
-import { ActionSystem } from './ActionSystem';
 import { ActionError } from '@components/ActionError';
-import { OrderPrice } from '@components/OrderPrice';
 
 let world: World;
 
@@ -13,56 +11,54 @@ describe('MoneySystem', () => {
   beforeEach(() => {
     world = new World();
     world.addSystem(new MoneySystem());
-    world.addSystem(new ActionSystem());
   });
 
-  it('should buy an entity with UnlockPrice', () => {
+  it('should charge the buyer and mark the action as Paid', () => {
     const buyer = world.createEntity();
     world.addEntityComponents(buyer, new Money(100));
-    const target = world.createEntity();
-    world.addEntityComponents(target, new UnlockPrice(10));
-    spawnBuyAction(world, buyer, target);
+    const action = spawnBuyAction(world, buyer, 10);
 
     world.update(0);
 
-    const buyerComponents = world.getEntityComponents(buyer)!;
-    const money = buyerComponents.get(Money)!;
-    expect(money.value).toBe(90);
-
-    world.update(0);
-
-    expect(money.value).toBe(90);
+    expect(world.getEntityComponents(buyer)!.get(Money)!.value).toBe(90);
+    expect(world.getEntityComponents(action)!.get(Paid)).toBeDefined();
   });
 
-  it('should buy an entity with OrderPrice', () => {
+  it('should let the buyer spend all of their money', () => {
     const buyer = world.createEntity();
     world.addEntityComponents(buyer, new Money(50));
-    const target = world.createEntity();
-    world.addEntityComponents(target, new OrderPrice(50));
-    spawnBuyAction(world, buyer, target);
+    spawnBuyAction(world, buyer, 50);
 
     world.update(0);
 
-    const buyerComponents = world.getEntityComponents(buyer)!;
-    const money = buyerComponents.get(Money)!;
-    expect(money.value).toBe(0);
+    expect(world.getEntityComponents(buyer)!.get(Money)!.value).toBe(0);
   });
 
-  it('should not buy if buyer cannot afford UnlockPrice', () => {
+  it('should not buy if buyer cannot afford the cost', () => {
     const buyer = world.createEntity();
     world.addEntityComponents(buyer, new Money(20));
-    const target = world.createEntity();
-    world.addEntityComponents(target, new UnlockPrice(25));
-    spawnBuyAction(world, buyer, target);
+    const action = spawnBuyAction(world, buyer, 25);
 
     world.update(0);
 
-    const buyerComponents = world.getEntityComponents(buyer)!;
-    const money = buyerComponents.get(Money)!;
-    expect(money.value).toBe(20);
+    expect(world.getEntityComponents(buyer)!.get(Money)!.value).toBe(20);
+    expect(world.getEntityComponents(action)!.get(Paid)).toBeUndefined();
+    const [[_error, errorComponents]] = world.view(ActionError);
+    expect(errorComponents.get(ActionError)).toMatchObject({
+      errorId: 'buyNotEnoughMoney',
+      meta: { amount: 5 },
+    });
+  });
 
-    const actionErrors = world.view(ActionError);
-    const [[actionError, errorComponents]] = actionErrors;
-    expect(errorComponents.get(ActionError).errorId).toBe('buyNotEnoughMoney');
+  it('should report a missing buyer', () => {
+    spawnBuyAction(world, 999, 10);
+
+    world.update(0);
+
+    const [[_error, errorComponents]] = world.view(ActionError);
+    expect(errorComponents.get(ActionError)).toMatchObject({
+      errorId: 'noEntity',
+      meta: { entity: 999 },
+    });
   });
 });

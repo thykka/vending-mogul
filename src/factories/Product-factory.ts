@@ -1,4 +1,4 @@
-import type { World } from '@jakeklassen/ecs';
+import type { EntityId, World } from '@jakeklassen/ecs';
 import { type ProductId, type SpriteId, loadData } from '@data/registry';
 import { ProductDataId } from '@components/DataId';
 
@@ -15,7 +15,7 @@ export function spawnProductStack(
   amount: number,
   x = 0,
   y = 0
-): number {
+): EntityId {
   const productData = loadData('products', id);
   const spriteData = loadData('sprites', productData.sprite as SpriteId);
 

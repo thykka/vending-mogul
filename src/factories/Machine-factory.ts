@@ -15,7 +15,7 @@ export function spawnMachine(
   world: World,
   id: MachineId,
   parent?: EntityId
-): number {
+): EntityId {
   const machineData = loadData('machines', id);
   const machine = world.createEntity();
   const children = new Children();

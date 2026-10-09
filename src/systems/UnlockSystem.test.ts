@@ -69,4 +69,32 @@ describe('Unlock purchase', () => {
     expect(errorComponents.get(ActionError)!.errorId).toBe('buyNotEnoughMoney');
     expect(errorComponents.get(ActionError)!.meta).toEqual({ amount: 10 });
   });
+
+  it('should refund the buyer when the target is already unlocked', () => {
+    const buyer = world.createEntity();
+    world.addEntityComponents(buyer, new Money(100));
+    const target = world.createEntity();
+    world.addEntityComponents(target, new UnlockPrice(30));
+    spawnUnlockPurchase(world, buyer, target);
+
+    world.update(0);
+
+    expect(world.getEntityComponents(buyer)!.get(Money)!.value).toBe(100);
+    const [[, errorComponents]] = world.view(ActionError);
+    expect(errorComponents.get(ActionError)!.errorId).toBe('unlockNotLocked');
+  });
+
+  it('should charge only once for unlocks purchased in the same update', () => {
+    const buyer = world.createEntity();
+    world.addEntityComponents(buyer, new Money(100));
+    const target = world.createEntity();
+    world.addEntityComponents(target, new Locked(), new UnlockPrice(30));
+    spawnUnlockPurchase(world, buyer, target);
+    spawnUnlockPurchase(world, buyer, target);
+
+    world.update(0);
+
+    expect(world.getEntityComponents(buyer)!.get(Money)!.value).toBe(70);
+    expect(world.getEntityComponents(target)!.get(Locked)).toBeUndefined();
+  });
 });
