@@ -5,6 +5,7 @@ import { Amount } from '@components/Amount';
 import { MachineDataId, ProductDataId } from '@components/DataId';
 import { loadData } from '@data/registry';
 import { spawnOrder } from '@factories/Order-factory';
+import { spawnProductStack } from '@factories/Product-factory';
 import { TimerSystem } from './TimerSystem';
 import { DeliverySystem } from './DeliverySystem';
 
@@ -40,7 +41,7 @@ describe('DeliverySystem', () => {
     expect(components.get(MachineDataId).id).toBe('gumball-single');
   });
 
-  it('should deliver each ordered product stack into Storage', () => {
+  it('should deliver ordered products into Storage', () => {
     const { deliveryTime, products } = loadData(
       'productOrders',
       'bouncyballbox'
@@ -53,10 +54,39 @@ describe('DeliverySystem', () => {
 
     expect(world.view(Order).length).toBe(0);
     const stored = world.view(ProductDataId, Amount, Stored);
-    expect(stored.length).toBe(stacks);
-    for (const [_entity, components] of stored) {
-      expect(components.get(ProductDataId).id).toBe(product);
-      expect(components.get(Amount).value).toBe(stackSize);
-    }
+    expect(stored.length).toBe(1);
+    const [[_stack, components]] = stored;
+    expect(components.get(ProductDataId).id).toBe(product);
+    expect(components.get(Amount).value).toBe(stacks * stackSize);
+  });
+
+  it('should merge deliveries of the same product in Storage', () => {
+    const { deliveryTime } = loadData('productOrders', 'bubblegumbox');
+    const { stackSize } = loadData('products', 'bubblegum');
+    spawnOrder(world, 'productOrders', 'bubblegumbox');
+    spawnOrder(world, 'productOrders', 'bubblegumbox');
+
+    world.update(deliveryTime * 1000);
+    spawnOrder(world, 'productOrders', 'bubblegumbox');
+    world.update(deliveryTime * 1000);
+
+    const stored = world.view(ProductDataId, Amount, Stored);
+    expect(stored.length).toBe(1);
+    const [[_stack, components]] = stored;
+    expect(components.get(Amount).value).toBe(3 * stackSize);
+  });
+
+  it('should not merge deliveries into stacks outside Storage', () => {
+    const { deliveryTime } = loadData('productOrders', 'bubblegumbox');
+    const { stackSize } = loadData('products', 'bubblegum');
+    const stocked = spawnProductStack(world, 'bubblegum', 0, 0, 10);
+    spawnOrder(world, 'productOrders', 'bubblegumbox');
+
+    world.update(deliveryTime * 1000);
+
+    const stockedAmount = world.getEntityComponents(stocked)!.get(Amount)!;
+    expect(stockedAmount.value).toBe(10);
+    const [[_stack, components]] = world.view(ProductDataId, Amount, Stored);
+    expect(components.get(Amount).value).toBe(stackSize);
   });
 });

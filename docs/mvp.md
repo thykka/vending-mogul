@@ -24,6 +24,7 @@ Minimal playable loop: order machine → deliver to Storage → install at Locat
 - Sales rate is fixed per machine (`salesInterval` in `machines.json`, seconds). Each interval the machine sells one item from a randomly picked stocked slot
 - Machines hold Money up to `moneyLimit` (`machines.json`)
 - Products must exactly match Slot shape and dimensions
+- Storage holds one pool per product; deliveries merge into it. Stocking moves items from the pool into a Slot, up to the Slot's capacity
 - Not in MVP: rent, selling machines, tossing products, uninstalling machines, save/load, upgrades
 
 ## Steps

@@ -2,6 +2,8 @@ import { System, World } from '@jakeklassen/ecs';
 import { Order } from '@components/Order';
 import { Timer } from '@components/timer';
 import { Stored } from '@components/Stored';
+import { Amount } from '@components/Amount';
+import { ProductDataId } from '@components/DataId';
 import {
   loadData,
   type MachineId,
@@ -21,23 +23,37 @@ export class DeliverySystem extends System {
   update(world: World, dt: number) {
     for (const [entity, components] of world.view(Order, Timer)) {
       if (!components.get(Timer).completed) continue;
-      for (const item of this.deliver(world, components.get(Order))) {
-        world.addEntityComponents(item, new Stored());
-      }
+      this.deliver(world, components.get(Order));
       world.deleteEntity(entity);
     }
   }
 
-  deliver(world: World, order: Order): number[] {
+  deliver(world: World, order: Order) {
     if (order.source === 'machineOrders') {
       const { machine } = loadData('machineOrders', order.id as MachineOrderId);
-      return [spawnMachine(world, machine as MachineId)];
+      const entity = spawnMachine(world, machine as MachineId);
+      world.addEntityComponents(entity, new Stored());
+      return;
     }
     const { products } = loadData('productOrders', order.id as ProductOrderId);
-    return products.flatMap(({ product, stacks }) =>
-      Array.from({ length: stacks }, () =>
-        spawnProductStack(world, product as ProductId)
-      )
-    );
+    for (const { product, stacks } of products) {
+      const { stackSize } = loadData('products', product as ProductId);
+      this.storeProducts(world, product as ProductId, stacks * stackSize);
+    }
+  }
+
+  /** Adds to the stored stack of `product`, or creates one if there is none. */
+  storeProducts(world: World, product: ProductId, amount: number) {
+    for (const [_entity, components] of world.view(
+      ProductDataId,
+      Amount,
+      Stored
+    )) {
+      if (components.get(ProductDataId).id !== product) continue;
+      components.get(Amount).value += amount;
+      return;
+    }
+    const entity = spawnProductStack(world, product, 0, 0, amount);
+    world.addEntityComponents(entity, new Stored());
   }
 }
