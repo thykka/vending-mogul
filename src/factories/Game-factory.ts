@@ -5,6 +5,8 @@ import { spawnMachines } from './Machine-factory';
 import { MoneySystem } from '../systems/MoneySystem';
 import { UnlockSystem } from '../systems/UnlockSystem';
 import { ActionSystem } from '../systems/ActionSystem';
+import { TimerSystem } from '../systems/TimerSystem';
+import { ActionErrorSystem } from '../systems/ActionErrorSystem';
 
 export function spawnGame(): World {
   const world = new World();
@@ -16,5 +18,7 @@ export function spawnGame(): World {
   world.addSystem(new MoneySystem());
   world.addSystem(new UnlockSystem());
   world.addSystem(new ActionSystem());
+  world.addSystem(new TimerSystem());
+  world.addSystem(new ActionErrorSystem());
   return world;
 }

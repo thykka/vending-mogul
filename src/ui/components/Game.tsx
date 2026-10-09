@@ -5,6 +5,7 @@ import { PlayerStats } from './Player/PlayerStats.jsx';
 import { useEffect, useState } from 'react';
 import { ViewList, ViewPanel, type ViewId } from './View/View.js';
 import { Views } from './views/index.js';
+import { ActionErrors } from './ActionErrors/ActionErrors.js';
 
 export function Game() {
   const [currentView, setCurrentView] = useState<ViewId<typeof Views>>('shop');
@@ -26,6 +27,7 @@ export function Game() {
           </Flex>
           <Flex center>Menu</Flex>
         </Flex>
+        <ActionErrors />
         <Flex fit scroll type="section">
           <ViewPanel views={Views} viewId={currentView} />
         </Flex>

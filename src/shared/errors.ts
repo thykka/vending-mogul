@@ -12,3 +12,8 @@ export const Errors = {
 
 export type ErrorId = keyof typeof Errors;
 export type ErrorMeta<T extends ErrorId> = Parameters<(typeof Errors)[T]>[0];
+
+export function formatError<T extends ErrorId>(errorId: T, meta: ErrorMeta<T>) {
+  const format = Errors[errorId] as (meta: ErrorMeta<T>) => string;
+  return format(meta);
+}

@@ -3,7 +3,11 @@ import { Action } from '../components/Action';
 import { UnlockAction } from '../components/UnlockAction';
 import { BuyAction } from '../components/BuyAction';
 import { ActionError } from '../components/ActionError';
+import { Timer } from '../components/timer';
 import type { ErrorId, ErrorMeta } from '../shared/errors';
+
+/** How long (ms) an ActionError stays visible before it is removed. */
+export const ACTION_ERROR_DURATION = 3000;
 
 export function spawnAction(world: World): number {
   const action = world.createEntity();
@@ -17,7 +21,11 @@ export function spawnActionError<T extends ErrorId>(
   errorMeta: ErrorMeta<T>
 ): number {
   const actionError = world.createEntity();
-  world.addEntityComponents(actionError, new ActionError(errorId, errorMeta));
+  world.addEntityComponents(
+    actionError,
+    new ActionError(errorId, errorMeta),
+    new Timer(ACTION_ERROR_DURATION)
+  );
   return actionError;
 }
 
