@@ -10,6 +10,7 @@ import { StockSystem } from '@systems/StockSystem';
 import { TimerSystem } from '@systems/TimerSystem';
 import { ActionErrorSystem } from '@systems/ActionErrorSystem';
 import { DeliverySystem } from '@systems/DeliverySystem';
+import { SalesSystem } from '@systems/SalesSystem';
 
 export function spawnGame(): World {
   const world = new World();
@@ -33,5 +34,6 @@ export function spawnGame(): World {
   world.addSystem(new TimerSystem());
   world.addSystem(new ActionErrorSystem());
   world.addSystem(new DeliverySystem());
+  world.addSystem(new SalesSystem());
   return world;
 }

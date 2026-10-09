@@ -8,6 +8,8 @@ import { Contents } from '@components/Contents';
 import { Money } from '@components/Money';
 import { Children } from '@components/Children';
 import { ProductCapacity } from '@components/ProductCapacity';
+import { MoneyLimit } from '@components/MoneyLimit';
+import { Sales } from '@components/Sales';
 
 export function spawnMachine(
   world: World,
@@ -21,6 +23,8 @@ export function spawnMachine(
     machine,
     new MachineDataId(id),
     new Money(0),
+    new MoneyLimit(machineData.moneyLimit),
+    new Sales(machineData.salesInterval * 1000),
     children
   );
   if (parent !== undefined)
