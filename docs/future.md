@@ -21,7 +21,7 @@ Mechanics planned for after the MVP. Not part of the current plan; see `design.m
 
 ## Order delivery methods
 
-- Order delivery methods can change stack sizes, delivery time, e.g. Bike courier, Van, Truck, Ship
+- Order delivery methods can change order amounts, delivery time, e.g. Bike courier, Van, Truck, Ship
 
 ### Example Orders
 

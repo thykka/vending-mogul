@@ -1,5 +1,5 @@
 import { Flex } from '@ui/components/Flex/Flex';
-import { allData, allIds, loadData, type ProductId } from '@data/registry';
+import { allData, allIds } from '@data/registry';
 import { ShopOrder } from './ShopOrder';
 
 export function ShopProductsView() {
@@ -10,10 +10,9 @@ export function ShopProductsView() {
         <ShopOrder source="productOrders" id={id} key={id}>
           <Flex>
             {id}
-            {orders[id].products.map(({ product, stacks }) => (
+            {orders[id].products.map(({ product, amount }) => (
               <small key={product}>
-                {stacks} × {product} (
-                {loadData('products', product as ProductId).stackSize})
+                {amount} × {product}
               </small>
             ))}
           </Flex>

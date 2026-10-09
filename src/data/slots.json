@@ -2,16 +2,19 @@
   "ball-s": {
     "width": 1,
     "height": 1,
-    "shape": "ball"
+    "shape": "ball",
+    "capacity": 50
   },
   "ball-m": {
     "width": 2,
     "height": 2,
-    "shape": "ball"
+    "shape": "ball",
+    "capacity": 50
   },
   "ball-l": {
     "width": 3,
     "height": 3,
-    "shape": "ball"
+    "shape": "ball",
+    "capacity": 50
   }
 }

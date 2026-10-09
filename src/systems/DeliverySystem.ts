@@ -36,9 +36,8 @@ export class DeliverySystem extends System {
       return;
     }
     const { products } = loadData('productOrders', order.id as ProductOrderId);
-    for (const { product, stacks } of products) {
-      const { stackSize } = loadData('products', product as ProductId);
-      this.storeProducts(world, product as ProductId, stacks * stackSize);
+    for (const { product, amount } of products) {
+      this.storeProducts(world, product as ProductId, amount);
     }
   }
 
@@ -53,7 +52,7 @@ export class DeliverySystem extends System {
       components.get(Amount).value += amount;
       return;
     }
-    const entity = spawnProductStack(world, product, 0, 0, amount);
+    const entity = spawnProductStack(world, product, amount);
     world.addEntityComponents(entity, new Stored());
   }
 }

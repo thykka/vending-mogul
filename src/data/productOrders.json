@@ -5,7 +5,7 @@
     "products": [
       {
         "product": "bubblegum",
-        "stacks": 1
+        "amount": 50
       }
     ]
   },
@@ -15,7 +15,7 @@
     "products": [
       {
         "product": "bouncyball",
-        "stacks": 2
+        "amount": 50
       }
     ]
   }

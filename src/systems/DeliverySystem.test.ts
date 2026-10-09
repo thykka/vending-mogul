@@ -46,8 +46,7 @@ describe('DeliverySystem', () => {
       'productOrders',
       'bouncyballbox'
     );
-    const [{ product, stacks }] = products;
-    const { stackSize } = loadData('products', 'bouncyball');
+    const [{ product, amount }] = products;
     spawnOrder(world, 'productOrders', 'bouncyballbox');
 
     world.update(deliveryTime * 1000);
@@ -57,12 +56,15 @@ describe('DeliverySystem', () => {
     expect(stored.length).toBe(1);
     const [[_stack, components]] = stored;
     expect(components.get(ProductDataId).id).toBe(product);
-    expect(components.get(Amount).value).toBe(stacks * stackSize);
+    expect(components.get(Amount).value).toBe(amount);
   });
 
   it('should merge deliveries of the same product in Storage', () => {
-    const { deliveryTime } = loadData('productOrders', 'bubblegumbox');
-    const { stackSize } = loadData('products', 'bubblegum');
+    const { deliveryTime, products } = loadData(
+      'productOrders',
+      'bubblegumbox'
+    );
+    const [{ amount }] = products;
     spawnOrder(world, 'productOrders', 'bubblegumbox');
     spawnOrder(world, 'productOrders', 'bubblegumbox');
 
@@ -73,13 +75,16 @@ describe('DeliverySystem', () => {
     const stored = world.view(ProductDataId, Amount, Stored);
     expect(stored.length).toBe(1);
     const [[_stack, components]] = stored;
-    expect(components.get(Amount).value).toBe(3 * stackSize);
+    expect(components.get(Amount).value).toBe(3 * amount);
   });
 
   it('should not merge deliveries into stacks outside Storage', () => {
-    const { deliveryTime } = loadData('productOrders', 'bubblegumbox');
-    const { stackSize } = loadData('products', 'bubblegum');
-    const stocked = spawnProductStack(world, 'bubblegum', 0, 0, 10);
+    const { deliveryTime, products } = loadData(
+      'productOrders',
+      'bubblegumbox'
+    );
+    const [{ amount }] = products;
+    const stocked = spawnProductStack(world, 'bubblegum', 10);
     spawnOrder(world, 'productOrders', 'bubblegumbox');
 
     world.update(deliveryTime * 1000);
@@ -87,6 +92,6 @@ describe('DeliverySystem', () => {
     const stockedAmount = world.getEntityComponents(stocked)!.get(Amount)!;
     expect(stockedAmount.value).toBe(10);
     const [[_stack, components]] = world.view(ProductDataId, Amount, Stored);
-    expect(components.get(Amount).value).toBe(stackSize);
+    expect(components.get(Amount).value).toBe(amount);
   });
 });

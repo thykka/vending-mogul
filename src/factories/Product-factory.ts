@@ -11,9 +11,9 @@ import { Shape } from '@components/Shape';
 export function spawnProductStack(
   world: World,
   id: ProductId,
+  amount: number,
   x = 0,
-  y = 0,
-  amount?: number
+  y = 0
 ): number {
   const productData = loadData('products', id);
   const spriteData = loadData('sprites', productData.sprite as SpriteId);
@@ -22,7 +22,7 @@ export function spawnProductStack(
   world.addEntityComponents(
     entity,
     new ProductDataId(id),
-    new Amount(amount ?? productData.stackSize),
+    new Amount(amount),
     new Position(x, y),
     new Price(productData.salePrice),
     new Sprite(...spriteData.source),
