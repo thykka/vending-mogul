@@ -47,6 +47,11 @@
   overflow: auto;
 }
 
+.flex:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .theme-default {
   background-color: transparent;
   color: currentColor;

@@ -1,5 +1,5 @@
 import { LocationsView } from './Locations';
-import { MachineView } from './Machine';
+import { MachineView } from './Machine/Machine';
 import { OrdersView } from './Orders';
 import { ShopView } from './Shop/Shop';
 import { StorageView } from './Storage';

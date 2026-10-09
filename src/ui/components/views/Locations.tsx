@@ -2,6 +2,7 @@ import type { EntityId } from '@jakeklassen/ecs';
 import { Flex } from '@ui/components/Flex/Flex';
 import { useGameView } from '@ui/hooks/useGameView';
 import { useGame } from '@ui/context/GameContext';
+import { useNavigation } from '@ui/context/NavigationContext';
 import { LocationDataId, MachineDataId } from '@components/DataId';
 import { MachineCapacity } from '@components/MachineCapacity';
 import { Locked } from '@components/Locked';
@@ -23,6 +24,7 @@ function useStoredMachineTypes() {
 
 export function LocationsView() {
   const game = useGame();
+  const { viewMachine } = useNavigation();
   const locations = useGameView(LocationDataId, MachineCapacity).filter(
     ([_location, components]) => !components.get(Locked)
   );
@@ -51,8 +53,18 @@ export function LocationsView() {
                 </Flex>
               </Flex>
               {machines.map(([machine, machineComponents]) => (
-                <Flex pad key={machine}>
-                  {machineComponents.get(MachineDataId).id}
+                <Flex horizontal gap key={machine}>
+                  <Flex pad fit verticalCenter>
+                    {machineComponents.get(MachineDataId).id}
+                  </Flex>
+                  <Flex
+                    pad
+                    theme="invert"
+                    type="button"
+                    onClick={() => viewMachine(machine)}
+                  >
+                    View
+                  </Flex>
                 </Flex>
               ))}
               {machines.length < capacity && (
