@@ -15,7 +15,7 @@ export class SpriteRenderer extends System {
     public tileSize = 16
   ) {
     super();
-    this.#ctx = this.canvas.getContext('2d');
+    this.#ctx = this.canvas.getContext('2d')!;
     this.#ctx.imageSmoothingEnabled = false;
   }
 

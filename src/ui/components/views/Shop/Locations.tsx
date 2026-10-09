@@ -13,8 +13,8 @@ import { Money } from '../../../../components/Money';
 export function ShopLocationsView() {
   const { removeComponents } = useGameMutate();
   const game = useGame();
-  const player = game.findEntity(Player);
-  const playerMoney = game.getEntityComponents(player).get(Money).value;
+  const player = game.findEntity(Player)!;
+  const playerMoney = game.getEntityComponents(player)?.get(Money)?.value || -1;
   const locations = useGameView(LocationDataId);
   return (
     <Flex>

@@ -24,7 +24,7 @@
     "rootDir": ".",
     "sourceMap": true,
     "strict": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "target": "es2022"
   },
   "include": ["src/**/*", "tests/**/*"]

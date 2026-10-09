@@ -11,7 +11,7 @@ describe('UnlockAction', () => {
     world.addSystem(new UnlockSystem());
 
     spawnUnlockAction(world, unlockable);
-    const components = world.getEntityComponents(unlockable);
+    const components = world.getEntityComponents(unlockable)!;
     const initiallyLocked = components.get(Locked);
     expect(Boolean(initiallyLocked)).toBe(true);
 

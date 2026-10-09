@@ -15,20 +15,20 @@ export function notifyListeners() {
 }
 
 let lastTick = performance.now();
-let rafId: number;
+let rafId: number | null = null;
 
 function tick() {
   const now = performance.now();
   const dt = now - lastTick;
   lastTick = now;
   game.update(dt);
-  listeners.forEach((listener) => listener());
   notifyListeners();
   rafId = requestAnimationFrame(tick);
 }
 
 export function startLoop() {
   if (rafId !== null) return;
+  lastTick = performance.now();
   rafId = requestAnimationFrame(tick);
 }
 export function stopLoop() {

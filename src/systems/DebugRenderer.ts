@@ -33,7 +33,7 @@ export class DebugRenderer extends System {
   public update(world: World) {
     const output = ['Cursor'];
     for (const [entity, components] of world.view(MouseButton, Position)) {
-      const rows = [];
+      const rows: string[] = [];
       const pos = components.get(Position);
       rows.push(`${pos.x}, ${pos.y}`);
       const button = components.get(MouseButton);
@@ -44,7 +44,7 @@ export class DebugRenderer extends System {
     }
     output.push('Player');
     for (const [entity, components] of world.view(Money, Name)) {
-      const rows = [];
+      const rows: string[] = [];
       rows.push(
         ['name', components.get(Name).text].join(': '),
         ['money', currency(components.get(Money).value)].join(': ')
@@ -52,8 +52,8 @@ export class DebugRenderer extends System {
       output.push(entity + ' ' + rows.join('\n  ') + '\n');
     }
     output.push('Products');
-    for (const [entity, components] of world.view(ProductDataId)) {
-      const rows = [];
+    for (const [entity, components] of world.view(ProductDataId, Sprite)) {
+      const rows: string[] = [];
       const sprite = components.get(Sprite);
       rows.push(
         keyValue(components.get(ProductDataId), 'id'),
@@ -68,21 +68,22 @@ export class DebugRenderer extends System {
     }
     output.push('Machines');
     for (const [machineEntity, components] of world.view(MachineDataId)) {
-      const rows = [];
+      const rows: string[] = [];
       rows.push(
         keyValue(components.get(MachineDataId), 'id'),
         keyValue(components.get(Money), 'value', currency),
         'Slots:'
       );
-      const children = components.get(Children).entities;
+      const children = components.get(Children)?.entities ?? [];
       for (const slotEntity of children) {
         const slotComponents = world.getEntityComponents(slotEntity);
-        const slotRow = [];
+        if (!slotComponents) continue;
+        const slotRow: string[] = [];
         const size = slotComponents.get(Size);
         slotRow.push(
-          `shape: ${slotComponents.get(Shape).id}`,
-          `size: ${size.w}x${size.h}`,
-          `item: ${slotComponents.get(Contents).item}`
+          `shape: ${slotComponents.get(Shape)?.id}`,
+          `size: ${size?.w}x${size?.h}`,
+          `item: ${slotComponents.get(Contents)?.item}`
         );
         rows.push(slotEntity + ' ' + slotRow.join('\n    ') + '\n');
       }

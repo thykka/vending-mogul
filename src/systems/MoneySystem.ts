@@ -15,6 +15,10 @@ export class MoneySystem extends System {
     for (const [entity, components] of world.view(BuyAction)) {
       const { buyer, buyable } = components.get(BuyAction);
       const buyerComponents = world.getEntityComponents(buyer);
+      if (!buyerComponents) {
+        this.showError(world, 'noEntity', { entity });
+        continue;
+      }
       const money = buyerComponents.get(Money);
       if (!money) {
         this.showError(world, 'buyNoMoney', {});
@@ -35,6 +39,10 @@ export class MoneySystem extends System {
 
   getCost(world: World, buyableEntity: number): number | null {
     const buyableComponents = world.getEntityComponents(buyableEntity);
+    if (!buyableComponents) {
+      this.showError(world, 'noEntity', { entity: buyableEntity });
+      return null;
+    }
     const unlockPrice = buyableComponents.get(UnlockPrice);
     if (unlockPrice) return unlockPrice.value;
     const orderPrice = buyableComponents.get(OrderPrice);
