@@ -2,7 +2,6 @@ import ProductsData from './products.json';
 import SpritesData from './sprites.json';
 import MachinesData from './machines.json';
 import LocationsData from './locations.json';
-import WarehousesData from './warehouses.json';
 import SlotsData from './slots.json';
 
 export const DataRegistry = Object.freeze({
@@ -10,7 +9,6 @@ export const DataRegistry = Object.freeze({
   machines: MachinesData,
   products: ProductsData,
   sprites: SpritesData,
-  warehouses: WarehousesData,
   slots: SlotsData,
 });
 
@@ -48,5 +46,4 @@ export type ProductId = DataId<'products'>;
 export type SpriteId = DataId<'sprites'>;
 export type MachineId = DataId<'machines'>;
 export type LocationId = DataId<'locations'>;
-export type WarehouseId = DataId<'warehouses'>;
 export type SlotId = DataId<'slots'>;
