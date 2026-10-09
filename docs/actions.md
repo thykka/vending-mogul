@@ -1,76 +1,50 @@
 # Actions design outline
 
-Data:
+Actions are short-lived entities. The UI spawns them, systems process them during the next update, and `ActionSystem` deletes them at the end of the update.
 
-- ActionIntents
-  - move-money:
-    - Subtracts Money from Source (if defined)
-    - Adds Money to Target (if defined)
-  - move-contents:
-    - Removes entity from Source Contents (if defined)
-    - Adds entity to Target Contents (if defined)
+Components:
 
-Constructs:
+- `Action`: marks an entity as an action
+- `BuyAction`: `buyer`, `buyable` entities. Charges `buyable`'s UnlockPrice or OrderPrice from `buyer` Money
+- `UnlockAction`: `target` entity. Removes `Locked` from `target`
+- `Paid`: added to an action once its BuyAction has been paid for
+- `ActionError`: spawned as its own entity when an action fails
 
-- Cursor
-  - `Position`: x, y
-  - `held`: bool
-  - `pressed`: bool
-  - `released`: bool
-
-- Button
-  - `Position`: x, y
-  - `Size`: w, h
-  - `ActionIntent`: ActionIntentId
-
-- ActionEvent
-  - `ActionIntent`: ActionIntentId
-  - `Target`: entity
-  - `Source`: entity
+Factories (`factories/Action-factory.ts`) combine these, e.g. `spawnUnlockPurchase` creates an action with both `BuyAction` and `UnlockAction`.
 
 ## What happens when player presses a button
 
-- ButtonSystem:
-  - Iterate through Buttons:
-    - If Cursor Position _collides_ with Button Position & Size:
-      - If Button is `held` and Cursor is `released`:
-        - Read Button ActionIntent and create an ActionEvent
-        - Unset Button `held`
-      - If Cursor is `pressed`, set Button as `held`
-    - Cursor doesn't _collide_ with Button:
-      - If Button is `held`, unset Button `held`
-
-- ActionSystem:
-  - Iterate through ActionEvents:
-    - Known ActionIntent is found:
-      - Execute action with ActionEvent `Target` & `Source`
-    - If there's a problem, spawn an entity with ActionError
-  - Remove all Actions
+- React UI button calls an action factory, e.g. `spawnUnlockPurchase(game, player, location)`
+- Systems run in order:
+  - MoneySystem: for each BuyAction, charge buyer and add `Paid`, or spawn an ActionError
+  - UnlockSystem: for each UnlockAction, remove `Locked` from target. If the action has a BuyAction, only proceed if `Paid`
+  - ActionSystem: delete all Action entities
 
 ## What kinds of actions do we actually need for each view?
 
 ### Global/Player
 
-- Switch View (Contracts / Warehouse / Locations / Machines)
+- Switch View (Shop / Orders / Storage / Map / Machine)
 
-### Contracts
+### Shop
 
-- Signing Contracts:
-  - Subtract Player Money
-  - Add Delivery into Player ActiveDeliveries?
+- Unlocking Locations, Machines, Products: Subtract Player Money, remove `Locked`
+- Ordering Machines and Products: Subtract Player Money, create an Order
 
-### Warehouse
+### Orders
 
-- Purchasing Products (via Contract): Create Product into Warehouse ProductSlot
-- Purchasing Machines (via Contract): Create Machine into Warehouse MachineSlot
-- Tossing Products: Remove Product from Warehouse ProductSlot
-- Selling Machines: Remove Machine from Warehouse MachineSlot, Add Player Money
+- Delivering Orders: Create Machine or Product into Storage
 
-### Location
+### Storage
 
-- Installing Machinges: Move Machine from Warehouse MachineSlot into Location MachineSlot
+- Tossing Products: Remove Product from Storage
+- Selling Machines: Remove Machine from Storage, Add 50% of its initial cost to Player Money
+
+### Map
+
+- Installing Machines: Move Machine from Storage into Location MachineSlot
 
 ### Machine
 
-- Stocking Products: Move Product from Warehouse ProductSlot into Machine ProductSlot
+- Stocking Products: Move Product from Storage into Machine ProductSlot
 - Collecting earnings: Move Machine Change into Player Money

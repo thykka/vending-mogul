@@ -1,5 +1,8 @@
 # Layout
 
+Working sketch of views and the data they show. Not prescriptive; superseded by UI code in `src/ui/components/views/` as views get built.
+
+
 - UI (grid-v)
   - Header (grid-h)
     - Time/calendar
@@ -87,7 +90,7 @@
         - ViewShopMachines Button
       - [not empty]
         - InstallOrder Button // TODO: Choose Location & Slot
-        - DecommissionOrder Button
+        - SellMachine Button
   - Tab: Products
     - Title
     - Description
@@ -119,7 +122,8 @@
 
 - Icon
 - Title
-- Money
+- Money / Money limit
+- Collect Button
 - Machine ProductSlot[]
   - Icon
   - Title
