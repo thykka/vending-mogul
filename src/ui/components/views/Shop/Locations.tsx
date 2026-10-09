@@ -5,16 +5,15 @@ import { Name } from '../../../../components/Name';
 import { Locked } from '../../../../components/Locked';
 import { UnlockPrice } from '../../../../components/UnlockPrice';
 import { formatCurrency } from '../../../utils/formatter';
-import { useGameMutate } from '../../../hooks/useGameMutate';
 import { useGame } from '../../../context/GameContext';
 import { Player } from '../../../../components/Player';
 import { Money } from '../../../../components/Money';
+import { spawnUnlockPurchase } from '../../../../factories/Action-factory';
 
 export function ShopLocationsView() {
-  const { removeComponents } = useGameMutate();
   const game = useGame();
-  const player = game.findEntity(Player);
-  const playerMoney = game.getEntityComponents(player).get(Money).value;
+  const player = game.findEntity(Player)!;
+  const playerMoney = game.getEntityComponents(player)?.get(Money)?.value ?? 0;
   const locations = useGameView(LocationDataId);
   return (
     <Flex>
@@ -36,7 +35,7 @@ export function ShopLocationsView() {
                   pad
                   theme="invert"
                   type="button"
-                  onClick={() => removeComponents(location, Locked)}
+                  onClick={() => spawnUnlockPurchase(game, player, location)}
                 >
                   Unlock
                 </Flex>

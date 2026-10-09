@@ -25,8 +25,8 @@ describe('MoneySystem', () => {
 
     world.update(0);
 
-    const buyerComponents = world.getEntityComponents(buyer);
-    const money = buyerComponents.get(Money);
+    const buyerComponents = world.getEntityComponents(buyer)!;
+    const money = buyerComponents.get(Money)!;
     expect(money.value).toBe(90);
 
     world.update(0);
@@ -43,8 +43,8 @@ describe('MoneySystem', () => {
 
     world.update(0);
 
-    const buyerComponents = world.getEntityComponents(buyer);
-    const money = buyerComponents.get(Money);
+    const buyerComponents = world.getEntityComponents(buyer)!;
+    const money = buyerComponents.get(Money)!;
     expect(money.value).toBe(0);
   });
 
@@ -57,8 +57,8 @@ describe('MoneySystem', () => {
 
     world.update(0);
 
-    const buyerComponents = world.getEntityComponents(buyer);
-    const money = buyerComponents.get(Money);
+    const buyerComponents = world.getEntityComponents(buyer)!;
+    const money = buyerComponents.get(Money)!;
     expect(money.value).toBe(20);
 
     const actionErrors = world.view(ActionError);

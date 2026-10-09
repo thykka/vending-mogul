@@ -3,6 +3,7 @@ import { formatCurrency } from '../ui/utils/formatter';
 type NoMeta = Record<string, never>;
 
 export const Errors = {
+  noEntity: ({ entity }: { entity: number }) => `Entity ${entity} not found`,
   buyNotEnoughMoney: ({ amount }: { amount: number }) =>
     `Cannot buy: Missing ${formatCurrency(amount)}`,
   buyNoMoney: (_: NoMeta) => 'Cannot buy: Buyer has no Money',
