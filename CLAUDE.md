@@ -13,6 +13,7 @@ Game UI uses React for UI, hooked to state via `ui/hooks/useGameView.ts` and `ui
 - GitHub access is restricted. Always prompt user to handle tasks like pushing or pulling.
 - Project is in an exploratory phase; prefer simple and flexible solutions over rigid and complex ones.
 - Always ask user before adding new dependencies.
+- Don't guess, prove your assumptions. For game design decisions, ask user for their preference.
 
 # Usage
 
