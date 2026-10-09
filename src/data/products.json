@@ -3,12 +3,16 @@
     "salePrice": 1,
     "stackSize": 50,
     "sprite": "bubblegum",
-    "shape": "ball"
+    "shape": "ball",
+    "width": 1,
+    "height": 1
   },
   "bouncyball": {
     "salePrice": 2,
     "stackSize": 25,
     "sprite": "test",
-    "shape": "ball"
+    "shape": "ball",
+    "width": 2,
+    "height": 2
   }
 }

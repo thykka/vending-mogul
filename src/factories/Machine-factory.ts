@@ -1,10 +1,5 @@
 import type { EntityId, World } from '@jakeklassen/ecs';
-import {
-  allIds,
-  loadData,
-  type MachineId,
-  type SlotId,
-} from '../data/registry.js';
+import { loadData, type MachineId, type SlotId } from '../data/registry.js';
 import { MachineDataId, SlotDataId } from '../components/DataId.js';
 import { Size } from '../components/Size.js';
 import { Shape } from '../components/Shape.js';
@@ -39,8 +34,4 @@ export function spawnMachine(world: World, id: MachineId, parent?: EntityId) {
       children.entities.add(slot);
     });
   });
-}
-
-export function spawnMachines(world: World) {
-  allIds('machines').forEach((id) => spawnMachine(world, id));
 }

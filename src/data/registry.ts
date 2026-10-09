@@ -3,6 +3,8 @@ import SpritesData from './sprites.json';
 import MachinesData from './machines.json';
 import LocationsData from './locations.json';
 import SlotsData from './slots.json';
+import MachineOrdersData from './machineOrders.json';
+import ProductOrdersData from './productOrders.json';
 
 export const DataRegistry = Object.freeze({
   locations: LocationsData,
@@ -10,6 +12,8 @@ export const DataRegistry = Object.freeze({
   products: ProductsData,
   sprites: SpritesData,
   slots: SlotsData,
+  machineOrders: MachineOrdersData,
+  productOrders: ProductOrdersData,
 });
 
 export type DataRegistry = typeof DataRegistry;
@@ -47,3 +51,16 @@ export type SpriteId = DataId<'sprites'>;
 export type MachineId = DataId<'machines'>;
 export type LocationId = DataId<'locations'>;
 export type SlotId = DataId<'slots'>;
+export type MachineOrderId = DataId<'machineOrders'>;
+export type ProductOrderId = DataId<'productOrders'>;
+
+export type OrderSource = 'machineOrders' | 'productOrders';
+
+/** Fields shared by every kind of order. */
+export type OrderData = { price: number; deliveryTime: number };
+
+export function loadOrderData(source: OrderSource, id: string): OrderData {
+  const table: Record<string, OrderData> = DataRegistry[source];
+  if (!(id in table)) throw new Error(`Unknown ${source} id: ${id}`);
+  return table[id];
+}

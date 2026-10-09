@@ -9,7 +9,7 @@ export function spawnPlayer(world: World, name = 'Anonymous'): number {
     player,
     new Player(),
     new Name(name),
-    new Money(100)
+    new Money(150)
   );
   return player;
 }
