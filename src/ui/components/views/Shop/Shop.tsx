@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { ViewId, ViewList, ViewPanel } from '../../View/View';
-import { Flex } from '../../Flex/Flex';
+import { ViewId, ViewList, ViewPanel } from '@ui/components/View/View';
+import { Flex } from '@ui/components/Flex/Flex';
 import { ShopLocationsView } from './Locations';
 import { ShopMachinesView } from './Machines';
 import { ShopProductsView } from './Products';

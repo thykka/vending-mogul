@@ -1,5 +1,5 @@
 import { World } from '@jakeklassen/ecs';
-import { Action } from '../components/Action';
+import { Action } from '@components/Action';
 import { ActionSystem } from './ActionSystem';
 
 describe('Actions', () => {

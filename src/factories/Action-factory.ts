@@ -1,10 +1,10 @@
 import { World } from '@jakeklassen/ecs';
-import { Action } from '../components/Action';
-import { UnlockAction } from '../components/UnlockAction';
-import { BuyAction } from '../components/BuyAction';
-import { ActionError } from '../components/ActionError';
-import { Timer } from '../components/timer';
-import type { ErrorId, ErrorMeta } from '../shared/errors';
+import { Action } from '@components/Action';
+import { UnlockAction } from '@components/UnlockAction';
+import { BuyAction } from '@components/BuyAction';
+import { ActionError } from '@components/ActionError';
+import { Timer } from '@components/timer';
+import type { ErrorId, ErrorMeta } from '@shared/errors';
 
 /** How long (ms) an ActionError stays visible before it is removed. */
 export const ACTION_ERROR_DURATION = 3000;

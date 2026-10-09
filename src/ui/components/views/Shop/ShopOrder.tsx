@@ -1,16 +1,12 @@
 import type { ReactNode } from 'react';
-import { Flex } from '../../Flex/Flex';
-import { useGameView } from '../../../hooks/useGameView.js';
-import { useGame } from '../../../context/GameContext';
-import { Player } from '../../../../components/Player';
-import { Money } from '../../../../components/Money';
-import { formatCurrency } from '../../../utils/formatter';
-import { spawnOrderPurchase } from '../../../../factories/Order-factory';
-import {
-  loadOrderData,
-  type DataId,
-  type OrderSource,
-} from '../../../../data/registry';
+import { Flex } from '@ui/components/Flex/Flex';
+import { useGameView } from '@ui/hooks/useGameView';
+import { useGame } from '@ui/context/GameContext';
+import { Player } from '@components/Player';
+import { Money } from '@components/Money';
+import { formatCurrency } from '@ui/utils/formatter';
+import { spawnOrderPurchase } from '@factories/Order-factory';
+import { loadOrderData, type DataId, type OrderSource } from '@data/registry';
 
 type ShopOrderProps<S extends OrderSource> = {
   source: S;

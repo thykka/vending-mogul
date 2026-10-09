@@ -1,11 +1,11 @@
 import { World } from '@jakeklassen/ecs';
-import { Money } from '../components/Money';
-import { UnlockPrice } from '../components/UnlockPrice';
-import { spawnBuyAction } from '../factories/Action-factory';
+import { Money } from '@components/Money';
+import { UnlockPrice } from '@components/UnlockPrice';
+import { spawnBuyAction } from '@factories/Action-factory';
 import { MoneySystem } from './MoneySystem';
 import { ActionSystem } from './ActionSystem';
-import { ActionError } from '../components/ActionError';
-import { OrderPrice } from '../components/OrderPrice';
+import { ActionError } from '@components/ActionError';
+import { OrderPrice } from '@components/OrderPrice';
 
 let world: World;
 

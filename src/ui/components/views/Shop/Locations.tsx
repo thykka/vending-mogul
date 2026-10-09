@@ -1,14 +1,14 @@
-import { Flex } from '../../Flex/Flex';
-import { useGameView } from '../../../hooks/useGameView.js';
-import { LocationDataId } from '../../../../components/DataId';
-import { Name } from '../../../../components/Name';
-import { Locked } from '../../../../components/Locked';
-import { UnlockPrice } from '../../../../components/UnlockPrice';
-import { formatCurrency } from '../../../utils/formatter';
-import { useGame } from '../../../context/GameContext';
-import { Player } from '../../../../components/Player';
-import { Money } from '../../../../components/Money';
-import { spawnUnlockPurchase } from '../../../../factories/Action-factory';
+import { Flex } from '@ui/components/Flex/Flex';
+import { useGameView } from '@ui/hooks/useGameView';
+import { LocationDataId } from '@components/DataId';
+import { Name } from '@components/Name';
+import { Locked } from '@components/Locked';
+import { UnlockPrice } from '@components/UnlockPrice';
+import { formatCurrency } from '@ui/utils/formatter';
+import { useGame } from '@ui/context/GameContext';
+import { Player } from '@components/Player';
+import { Money } from '@components/Money';
+import { spawnUnlockPurchase } from '@factories/Action-factory';
 
 export function ShopLocationsView() {
   const game = useGame();

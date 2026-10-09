@@ -1,12 +1,12 @@
 import type { EntityId, World } from '@jakeklassen/ecs';
-import { loadData, type MachineId, type SlotId } from '../data/registry.js';
-import { MachineDataId, SlotDataId } from '../components/DataId.js';
-import { Size } from '../components/Size.js';
-import { Shape } from '../components/Shape.js';
-import { Parent } from '../components/Parent.js';
-import { Contents } from '../components/Contents.js';
-import { Money } from '../components/Money.js';
-import { Children } from '../components/Children.js';
+import { loadData, type MachineId, type SlotId } from '@data/registry';
+import { MachineDataId, SlotDataId } from '@components/DataId';
+import { Size } from '@components/Size';
+import { Shape } from '@components/Shape';
+import { Parent } from '@components/Parent';
+import { Contents } from '@components/Contents';
+import { Money } from '@components/Money';
+import { Children } from '@components/Children';
 
 export function spawnMachine(world: World, id: MachineId, parent?: EntityId) {
   const machineData = loadData('machines', id);

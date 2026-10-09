@@ -1,6 +1,6 @@
-import { game, startLoop, stopLoop } from '../../game.js';
+import { game, startLoop, stopLoop } from '@/game';
 import { Flex } from './Flex/Flex.js';
-import { GameContext } from '../context/GameContext.jsx';
+import { GameContext } from '@ui/context/GameContext';
 import { PlayerStats } from './Player/PlayerStats.jsx';
 import { useEffect, useState } from 'react';
 import { ViewList, ViewPanel, type ViewId } from './View/View.js';

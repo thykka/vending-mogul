@@ -1,12 +1,12 @@
 import { World } from '@jakeklassen/ecs';
 import { spawnPlayer } from './Player-factory';
 import { spawnLocations } from './Location-factory';
-import { MoneySystem } from '../systems/MoneySystem';
-import { UnlockSystem } from '../systems/UnlockSystem';
-import { ActionSystem } from '../systems/ActionSystem';
-import { OrderSystem } from '../systems/OrderSystem';
-import { TimerSystem } from '../systems/TimerSystem';
-import { ActionErrorSystem } from '../systems/ActionErrorSystem';
+import { MoneySystem } from '@systems/MoneySystem';
+import { UnlockSystem } from '@systems/UnlockSystem';
+import { ActionSystem } from '@systems/ActionSystem';
+import { OrderSystem } from '@systems/OrderSystem';
+import { TimerSystem } from '@systems/TimerSystem';
+import { ActionErrorSystem } from '@systems/ActionErrorSystem';
 
 export function spawnGame(): World {
   const world = new World();

@@ -1,7 +1,7 @@
 import type { World } from '@jakeklassen/ecs';
-import { Name } from '../components/Name.js';
-import { Money } from '../components/Money.js';
-import { Player } from '../components/Player.js';
+import { Name } from '@components/Name';
+import { Money } from '@components/Money';
+import { Player } from '@components/Player';
 
 export function spawnPlayer(world: World, name = 'Anonymous'): number {
   const player = world.createEntity();

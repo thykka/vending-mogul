@@ -23,4 +23,5 @@ Game UI uses React for UI, hooked to state via `ui/hooks/useGameView.ts` and `ui
 # Conventions
 
 - Unit tests sit next to code as `*.test.ts`
+- Import from other directories via path aliases (`@components/*`, `@systems/*`, `@factories/*`, `@data/*`, `@shared/*`, `@ui/*`, `@/*` for `src/`); same-directory imports stay relative. Aliases are defined in both `tsconfig.json` and `jest.config.js`
 - Use scoped commits; `<scope>: <description> [optional body]`, for example `UI: add Flex pad property`

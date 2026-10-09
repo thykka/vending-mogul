@@ -5,7 +5,7 @@ import type {
   LocationId,
   MachineId,
   SlotId,
-} from '../data/registry.js';
+} from '@data/registry';
 
 export class DataId<Id extends string> extends Component {
   constructor(public id: Id) {

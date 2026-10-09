@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Flex.module.css';
-import { classNames } from '../../utils/classNames';
+import { classNames } from '@ui/utils/classNames';
 
 const Themes = {
   default: 'theme-default',

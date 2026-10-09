@@ -1,9 +1,9 @@
 import { World } from '@jakeklassen/ecs';
-import { ActionError } from '../components/ActionError';
+import { ActionError } from '@components/ActionError';
 import {
   ACTION_ERROR_DURATION,
   spawnActionError,
-} from '../factories/Action-factory';
+} from '@factories/Action-factory';
 import { TimerSystem } from './TimerSystem';
 import { ActionErrorSystem } from './ActionErrorSystem';
 

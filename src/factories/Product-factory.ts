@@ -1,12 +1,12 @@
 import type { World } from '@jakeklassen/ecs';
-import { type ProductId, type SpriteId, loadData } from '../data/registry.js';
-import { ProductDataId } from '../components/DataId.js';
+import { type ProductId, type SpriteId, loadData } from '@data/registry';
+import { ProductDataId } from '@components/DataId';
 
-import { Amount } from '../components/Amount.js';
-import { Position } from '../components/Position.js';
-import { Price } from '../components/Price.js';
-import { Sprite } from '../components/Sprite.js';
-import { Shape } from '../components/Shape.js';
+import { Amount } from '@components/Amount';
+import { Position } from '@components/Position';
+import { Price } from '@components/Price';
+import { Sprite } from '@components/Sprite';
+import { Shape } from '@components/Shape';
 
 export function spawnProductStack(
   world: World,

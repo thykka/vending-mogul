@@ -1,5 +1,5 @@
 import { World } from '@jakeklassen/ecs';
-import { Timer } from '../components/timer';
+import { Timer } from '@components/timer';
 import { TimerSystem } from './TimerSystem';
 
 let world: World;

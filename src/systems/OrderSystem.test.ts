@@ -1,10 +1,10 @@
 import { World } from '@jakeklassen/ecs';
-import { Money } from '../components/Money';
-import { Order } from '../components/Order';
-import { Timer } from '../components/timer';
-import { ActionError } from '../components/ActionError';
-import { spawnOrderPurchase } from '../factories/Order-factory';
-import { loadData } from '../data/registry';
+import { Money } from '@components/Money';
+import { Order } from '@components/Order';
+import { Timer } from '@components/timer';
+import { ActionError } from '@components/ActionError';
+import { spawnOrderPurchase } from '@factories/Order-factory';
+import { loadData } from '@data/registry';
 import { MoneySystem } from './MoneySystem';
 import { OrderSystem } from './OrderSystem';
 import { ActionSystem } from './ActionSystem';

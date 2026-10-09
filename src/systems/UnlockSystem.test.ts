@@ -1,16 +1,16 @@
 import { World } from '@jakeklassen/ecs';
 import { UnlockSystem } from './UnlockSystem';
-import { Locked } from '../components/Locked';
+import { Locked } from '@components/Locked';
 import {
   spawnUnlockAction,
   spawnUnlockPurchase,
-} from '../factories/Action-factory';
+} from '@factories/Action-factory';
 import { MoneySystem } from './MoneySystem';
 import { ActionSystem } from './ActionSystem';
-import { Money } from '../components/Money';
-import { UnlockPrice } from '../components/UnlockPrice';
-import { Action } from '../components/Action';
-import { ActionError } from '../components/ActionError';
+import { Money } from '@components/Money';
+import { UnlockPrice } from '@components/UnlockPrice';
+import { Action } from '@components/Action';
+import { ActionError } from '@components/ActionError';
 
 describe('UnlockAction', () => {
   it('should unlock an entity', () => {

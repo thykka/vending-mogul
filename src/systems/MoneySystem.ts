@@ -1,11 +1,11 @@
 import { System, World } from '@jakeklassen/ecs';
-import { UnlockPrice } from '../components/UnlockPrice';
-import { Money } from '../components/Money';
-import { BuyAction } from '../components/BuyAction';
-import { spawnActionError } from '../factories/Action-factory';
-import type { ErrorId, ErrorMeta } from '../shared/errors';
-import { OrderPrice } from '../components/OrderPrice';
-import { Paid } from '../components/Paid';
+import { UnlockPrice } from '@components/UnlockPrice';
+import { Money } from '@components/Money';
+import { BuyAction } from '@components/BuyAction';
+import { spawnActionError } from '@factories/Action-factory';
+import type { ErrorId, ErrorMeta } from '@shared/errors';
+import { OrderPrice } from '@components/OrderPrice';
+import { Paid } from '@components/Paid';
 
 export class MoneySystem extends System {
   constructor() {

@@ -1,7 +1,7 @@
-import { useGameView } from '../../hooks/useGameView.js';
-import { ActionError } from '../../../components/ActionError.js';
-import { formatError } from '../../../shared/errors.js';
-import { Flex } from '../Flex/Flex.js';
+import { useGameView } from '@ui/hooks/useGameView';
+import { ActionError } from '@components/ActionError';
+import { formatError } from '@shared/errors';
+import { Flex } from '@ui/components/Flex/Flex';
 
 export function ActionErrors() {
   const errors = useGameView(ActionError);

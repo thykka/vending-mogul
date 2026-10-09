@@ -1,9 +1,9 @@
 import type { World } from '@jakeklassen/ecs';
-import { loadData, allIds, type LocationId } from '../data/registry.js';
-import { LocationDataId } from '../components/DataId.js';
-import { Name } from '../components/Name.js';
-import { Locked } from '../components/Locked.js';
-import { UnlockPrice } from '../components/UnlockPrice.js';
+import { loadData, allIds, type LocationId } from '@data/registry';
+import { LocationDataId } from '@components/DataId';
+import { Name } from '@components/Name';
+import { Locked } from '@components/Locked';
+import { UnlockPrice } from '@components/UnlockPrice';
 
 export function spawnLocation(world: World, id: LocationId) {
   const locationData = {

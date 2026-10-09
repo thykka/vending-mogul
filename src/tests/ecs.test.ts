@@ -1,5 +1,5 @@
 import { System, World } from '@jakeklassen/ecs';
-import { Name } from '../components/Name';
+import { Name } from '@components/Name';
 
 describe('Basic ECS test', () => {
   it('Simple integration test', () => {

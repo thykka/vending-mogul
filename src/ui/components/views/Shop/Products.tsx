@@ -1,10 +1,5 @@
-import { Flex } from '../../Flex/Flex';
-import {
-  allData,
-  allIds,
-  loadData,
-  type ProductId,
-} from '../../../../data/registry';
+import { Flex } from '@ui/components/Flex/Flex';
+import { allData, allIds, loadData, type ProductId } from '@data/registry';
 import { ShopOrder } from './ShopOrder';
 
 export function ShopProductsView() {

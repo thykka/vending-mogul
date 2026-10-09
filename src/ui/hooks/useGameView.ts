@@ -1,6 +1,6 @@
 import { useSyncExternalStore, useCallback, useRef } from 'react';
 import { ComponentConstructor } from '@jakeklassen/ecs';
-import { game, subscribeToGame } from '../../game.js';
+import { game, subscribeToGame } from '@/game';
 
 export function useGameView<CC extends ComponentConstructor[]>(
   ...components: CC

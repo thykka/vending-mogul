@@ -1,7 +1,7 @@
 import { System, World } from '@jakeklassen/ecs';
-import { OrderAction } from '../components/OrderAction';
-import { Paid } from '../components/Paid';
-import { spawnOrder } from '../factories/Order-factory';
+import { OrderAction } from '@components/OrderAction';
+import { Paid } from '@components/Paid';
+import { spawnOrder } from '@factories/Order-factory';
 
 export class OrderSystem extends System {
   constructor() {

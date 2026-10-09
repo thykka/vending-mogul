@@ -1,11 +1,11 @@
 import type { World } from '@jakeklassen/ecs';
-import { loadOrderData, type DataId, type OrderSource } from '../data/registry';
-import { Action } from '../components/Action';
-import { BuyAction } from '../components/BuyAction';
-import { OrderPrice } from '../components/OrderPrice';
-import { OrderAction } from '../components/OrderAction';
-import { Order } from '../components/Order';
-import { Timer } from '../components/timer';
+import { loadOrderData, type DataId, type OrderSource } from '@data/registry';
+import { Action } from '@components/Action';
+import { BuyAction } from '@components/BuyAction';
+import { OrderPrice } from '@components/OrderPrice';
+import { OrderAction } from '@components/OrderAction';
+import { Order } from '@components/Order';
+import { Timer } from '@components/timer';
 
 /**
  * Places an Order only if `buyer` can pay its price.

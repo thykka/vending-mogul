@@ -1,4 +1,4 @@
-import { formatCurrency } from '../ui/utils/formatter';
+import { formatCurrency } from '@ui/utils/formatter';
 
 type NoMeta = Record<string, never>;
 

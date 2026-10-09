@@ -1,7 +1,7 @@
-import { useGameView } from '../../hooks/useGameView.js';
-import { Name } from '../../../components/Name.js';
-import { Money } from '../../../components/Money.js';
-import { Flex } from '../Flex/Flex.js';
+import { useGameView } from '@ui/hooks/useGameView';
+import { Name } from '@components/Name';
+import { Money } from '@components/Money';
+import { Flex } from '@ui/components/Flex/Flex';
 
 export function PlayerStats() {
   const [[_player, components]] = useGameView(Name, Money);
